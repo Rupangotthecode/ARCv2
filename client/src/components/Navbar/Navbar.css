@@ -1,0 +1,36 @@
+.navbar-main-container{
+    position: fixed;
+    top: 0;
+    display:flex;
+    flex-direction: row;
+    width: 100vw;
+    height: auto;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4%;
+    z-index: 4;
+}
+
+.navbar-left-container{
+    width: auto;
+    height: 100%;
+    padding: 1%;
+    padding-left: 5%;
+}
+
+.navbar-right-container{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    padding: 1%;
+    padding-right: 5%;
+    gap: 10px;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navbar-avatar-container{
+    border-radius: 60%;
+
+}

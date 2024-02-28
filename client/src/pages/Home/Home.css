@@ -1,0 +1,32 @@
+.home-main-container{
+    height: auto;
+    width: auto;
+    background-color: rgb(216, 246, 255);
+    display: flex;
+    flex-direction: column;
+
+}
+
+.home-navbar-container{
+    width: 100%;
+    height: 15%;
+}
+
+.home-content-container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 0;
+}
+
+.home-cartwheel{
+    width: 100%;
+    height: auto;
+}
+
+.home-gif-container{
+    position: fixed;
+    left:-30%;
+}

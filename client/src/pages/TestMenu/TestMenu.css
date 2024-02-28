@@ -1,0 +1,39 @@
+.testmenu-main-container{
+    background-color: rgb(232, 255, 247);
+    width: 100vw;
+    height: 100vh;
+    padding-top: 10vh;
+}
+
+.testmenu-content-container{
+    height: 100%;
+    width: 100%;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.testmenu-heading-container{
+    width: auto;
+    height: 20%;
+}
+
+.testmenu-options-container{
+    width: 100%;
+    height: 65%;
+    border: 4px solid teal;
+    border-radius: 40px ;
+    display: flex;
+    flex-direction: row;
+    padding: 2%;
+    justify-content: space-evenly;
+}
+
+.testmenu-option{
+    width: 30%;
+    background-color: rgb(181, 255, 234);
+    border-radius: 40px;
+    padding: 2%;
+}
