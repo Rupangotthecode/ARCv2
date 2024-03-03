@@ -8,8 +8,6 @@ import {
   FormLabel,
   Heading,
   Input,
-  InputGroup,
-  InputRightElement,
   VStack,
   HStack,
   RadioGroup,

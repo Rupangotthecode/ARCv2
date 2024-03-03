@@ -21,6 +21,7 @@ const userSchema = mongoose.Schema({
     B_3: { type: Number, default: 1 },
     B_4: { type: Number, default: 1 },
   },
+  results: [{ type: String }],
 });
 
 export default mongoose.model("User", userSchema);

@@ -9,6 +9,7 @@ import { TestAOptions, levelADataMU, levelADataSP } from "./const";
 import Test from "./pages/Test/Test";
 import TestLevelMenu from "./pages/TestLevelMenu/TestLevelMenu";
 import { levelADataES } from "./const";
+import Result from "./pages/Result/Result";
 
 const AllRoutes = () => {
   const location = useLocation();
@@ -78,6 +79,7 @@ const AllRoutes = () => {
 
         <Route path="/TestA/music" element={<Test page="music" />} />
         <Route path="/TestA/speech" element={<Test page="speech" />} />
+        <Route path="/result/:resId" element={<Result />} />
       </Routes>
     </AnimatePresence>
   );

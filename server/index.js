@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import userRoutes from "./routes/users.js";
 import audioRoutes from "./routes/audioSys.js";
+import imgRoutes from "./routes/imgSys.js";
+import resultRoutes from "./routes/results.js";
 
 import dotenv from "dotenv";
 
@@ -18,6 +20,8 @@ app.get("/", (req, res) => {
 
 app.use("/user", userRoutes);
 app.use("/audio", audioRoutes);
+app.use("/image", imgRoutes);
+app.use("/results", resultRoutes);
 
 mongoose.set("strictQuery", true);
 

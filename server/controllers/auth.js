@@ -30,6 +30,7 @@ export const signup = async (req, res) => {
 
 export const login = async (req, res) => {
   const { loginID, password } = req.body;
+  console.log(loginID, password);
   try {
     const existinguser = await users.findOne({ loginID });
     if (!existinguser) {

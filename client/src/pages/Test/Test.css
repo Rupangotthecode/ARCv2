@@ -18,6 +18,13 @@
     align-items: center;
 }
 
+.test-headers{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
 .test-question-container{
     flex:1;
     width: 100%;

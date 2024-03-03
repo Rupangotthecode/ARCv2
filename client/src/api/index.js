@@ -16,3 +16,29 @@ export const signUp = (authData) => API.post("/user/signup", authData);
 
 export const postParentQues = (quesData) =>
   API.post("/user/PQsubmit", quesData);
+
+export const submitResults = (
+  id,
+  loginID,
+  name,
+  score,
+  passed,
+  testName,
+  testCode,
+  testLevel,
+  testData
+) =>
+  API.post("/results/submit", {
+    id,
+    loginID,
+    name,
+    score,
+    passed,
+    testName,
+    testCode,
+    testLevel,
+    testData,
+  });
+
+export const getResultWithId = (resId) =>
+  API.get(`/results/getresult/${resId}`);

@@ -1,18 +1,7 @@
 import { useState, useEffect } from "react";
 
 const useAudio = (url) => {
-  const fetchurl = async (audiopath) => {
-    try {
-      const response = await fetch(audiopath);
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-
-      return url;
-    } catch (error) {
-      console.error("Error fetching audio file:", error);
-    }
-  };
-  const [audio] = useState(new Audio(fetchurl(url)));
+  const [audio] = useState(new Audio(url));
   const [playing, setPlaying] = useState(false);
 
   const toggle = () => setPlaying(!playing);

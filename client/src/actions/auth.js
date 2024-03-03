@@ -30,13 +30,25 @@ export const signup = (authData) => async (dispatch) => {
 
 export const login = (authData, navigate) => async (dispatch) => {
   try {
+    console.log("inside login", authData);
     const { data } = await api.logIn(authData);
     dispatch({ type: "AUTH", data });
     dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
-    navigate("/Home");
+    if (navigate) {
+      navigate("/Home");
+    }
   } catch (error) {
     console.log(error);
   }
+};
+
+export const persistLogin = () => async (dispatch) => {
+  try {
+    // const authData = JSON.parse(localStorage.getItem("Profile")).result;
+    // console.log(authData);
+    // dispatch(login(authData));
+    dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
+  } catch (error) {}
 };
 
 export const postParentQues = (id, quesArray, navigate) => async (dispatch) => {

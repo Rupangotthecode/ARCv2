@@ -5,6 +5,7 @@ import "./Test.css";
 import { Button, Heading } from "@chakra-ui/react";
 import Rules from "../../components/Test/Rules/Rules";
 import { testARules } from "../../const";
+import { levelADataES } from "../../const";
 import axios from "axios";
 
 const Test = (props) => {
@@ -39,11 +40,16 @@ const Test = (props) => {
         />
       )}
       <div className="test-heading-container">
-        <Heading fontWeight="800" color="teal">
-          {location.pathname.includes("TestA")
-            ? "செவிவழி விழிப்புணர்வு"
-            : "செவிவழி வேறுபாடு"}
-        </Heading>
+        <div className="test-headers">
+          <Heading fontWeight="800" color="teal" size="2xl">
+            {location.pathname.includes("TestA")
+              ? "செவிவழி விழிப்புணர்வு"
+              : "செவிவழி வேறுபாடு"}
+          </Heading>
+          <Heading fontWeight="800" color="teal" size="xl">
+            நிலை {props.level}: {levelADataES[props.level - 1]["description"]}
+          </Heading>
+        </div>
         <Button
           colorScheme="teal"
           onClick={toggleRules}

@@ -26,7 +26,7 @@ const Home = () => {
         <div className="home-welcome-container"></div>
         <div className="home-cartwheel">
           {admin ? (
-            <Homegrid data={data} user={User.result} />
+            <Homegrid data={data} user={User?.result} />
           ) : (
             <h1>Hi, child</h1>
           )}

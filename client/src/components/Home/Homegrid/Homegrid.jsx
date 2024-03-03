@@ -25,7 +25,7 @@ const Homegrid = (props) => {
           options={{ cursor: "", delay: 80 }}
           onInit={(typewriter) => {
             typewriter
-              .typeString(`வணக்கம் ${props.user.name}!`)
+              .typeString(`வணக்கம் ${props?.user?.name}!`)
               .callFunction(() => {
                 console.log("String typed out!");
               })

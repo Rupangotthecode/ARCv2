@@ -21,7 +21,9 @@ const TranScr = (props) => {
         <Heading color="turquoise">
           {props.trial ? "அடுத்த விசாரணை" : "அடுத்த கேள்வி"}
         </Heading>
-        <Heading color="turquoise">{props.description}</Heading>
+        <Heading color="turquoise" size="lg">
+          {props.description}
+        </Heading>
       </div>
       <div className="tr-button-container">
         {props.button ? (
