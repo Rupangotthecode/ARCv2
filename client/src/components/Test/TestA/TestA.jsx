@@ -1,15 +1,26 @@
-import { Heading, Image, useToast } from "@chakra-ui/react";
+import { Button, Heading, Image, useToast } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/react";
 import "./TestA.css";
 import TranScr from "../TranScr/TranScr";
 import { submitResults } from "../../../actions/results";
 
 const TestA = (props) => {
   const dispatch = useDispatch();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const User = useSelector((state) => state.currentUserReducer);
 
   const location = useLocation();
@@ -42,6 +53,14 @@ const TestA = (props) => {
     t2: false,
     t3: false,
   });
+  const [isModalsubmitOpen, setModalsubmitOpen] = useState(false);
+  const [isModalexitOpen, setModalexitOpen] = useState(false);
+
+  const openModalsubmit = () => setModalsubmitOpen(true);
+  const closeModalsubmit = () => setModalsubmitOpen(false);
+
+  const openModalexit = () => setModalexitOpen(true);
+  const closeModalexit = () => setModalexitOpen(false);
 
   useEffect(() => {
     const audioLink = testData?.[qno]["audio"];
@@ -274,16 +293,18 @@ const TestA = (props) => {
                   )}
                 </div>
               </div>
-              <div className="testa-picture-container">
-                <Image
-                  src={img}
-                  alt="picture"
-                  boxSize="auto"
-                  width="100%"
-                  height="100%"
-                  borderRadius="30px"
-                />
-              </div>
+              {props.level === 1 && (
+                <div className="testa-picture-container">
+                  <Image
+                    src={img}
+                    alt="picture"
+                    boxSize="auto"
+                    width="100%"
+                    height="100%"
+                    borderRadius="30px"
+                  />
+                </div>
+              )}
             </div>
           </div>
           <div className="testa-data-container">
@@ -308,23 +329,89 @@ const TestA = (props) => {
               </Heading>
             </div>
             <div className="testa-databox exit-buttons">
-              <div className="testa-exitbtn exitbtn-red">
-                <Heading
-                  color="rgb(244, 254, 255)"
-                  size="lg"
-                  onClick={() => handleSubmit()}
-                >
+              <div
+                className="testa-exitbtn exitbtn-red"
+                onClick={() => openModalsubmit()}
+              >
+                <Heading color="rgb(244, 254, 255)" size="lg">
                   சமர்ப்பிக்கவும்
                 </Heading>
               </div>
               <div
                 className="testa-exitbtn"
+                onClick={() => openModalexit()}
                 style={{ backgroundColor: "orangered" }}
               >
                 <Heading color="rgb(244, 254, 255)" size="lg">
                   வெளியேறு
                 </Heading>
               </div>
+              <Modal
+                isOpen={isModalsubmitOpen}
+                onClose={closeModalsubmit}
+                isCentered
+                height="300px"
+                width="300px"
+              >
+                <ModalOverlay />
+                <ModalContent>
+                  <ModalHeader>சோதனை சமர்ப்பிக்க?</ModalHeader>
+                  <ModalCloseButton />
+                  <ModalBody>
+                    சோதனையைச் சமர்ப்பிக்க விரும்புகிறீர்களா?
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button
+                      colorScheme="teal"
+                      mr={3}
+                      variant="ghost"
+                      onClick={closeModalsubmit}
+                    >
+                      மூடவும் தொடரவும்
+                    </Button>
+                    <Button
+                      colorScheme="teal"
+                      mr={3}
+                      onClick={() => handleSubmit}
+                    >
+                      ஆம், சமர்ப்பிக்கவும்
+                    </Button>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
+              <Modal
+                isOpen={isModalexitOpen}
+                onClose={closeModalexit}
+                isCentered
+                height="300px"
+                width="300px"
+              >
+                <ModalOverlay />
+                <ModalContent>
+                  <ModalHeader>வெளியேறும் சோதனை?</ModalHeader>
+                  <ModalCloseButton />
+                  <ModalBody>
+                    தேர்வில் இருந்து வெளியேற விரும்புகிறீர்களா?
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button
+                      colorScheme="teal"
+                      mr={3}
+                      variant="ghost"
+                      onClick={closeModalexit}
+                    >
+                      மூடவும் தொடரவும்
+                    </Button>
+                    <Button
+                      colorScheme="teal"
+                      mr={3}
+                      onClick={() => navigate("/Home")}
+                    >
+                      ஆம், வெளியேறு
+                    </Button>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
             </div>
           </div>
         </div>

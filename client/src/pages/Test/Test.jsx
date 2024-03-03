@@ -5,17 +5,27 @@ import "./Test.css";
 import { Button, Heading } from "@chakra-ui/react";
 import Rules from "../../components/Test/Rules/Rules";
 import { testARules } from "../../const";
-import { levelADataES } from "../../const";
+import { levelADataES, levelADataMU } from "../../const";
 import axios from "axios";
 
 const Test = (props) => {
   const location = useLocation();
   const [showRules, setShowRules] = useState(true);
 
+  let content = "";
+
+  if (location.pathname.includes("envsounds")) {
+    content = "envsounds";
+  } else if (location.pathname.includes("music")) {
+    content = "music";
+  } else if (location.pathname.includes("speech")) {
+    content = "speech";
+  }
+
   const [jsonData, setJsonData] = useState(null);
   useEffect(() => {
     axios
-      .get(`/db_json/A_envSounds.json`)
+      .get(`/db_json/A_${content}.json`)
       .then((response) => {
         setJsonData(response.data);
       })
@@ -34,7 +44,13 @@ const Test = (props) => {
       {showRules && (
         <Rules
           heading="செவிவழி விழிப்புணர்வு"
-          subheading="சுற்றுச்சூழல் ஒலிகள்"
+          subheading={
+            content === "envsounds"
+              ? "சுற்றுச்சூழல் ஒலிகள்"
+              : content === "music"
+              ? "இசை"
+              : "பேச்சு"
+          }
           content={testARules}
           closeRules={toggleRules}
         />
@@ -47,7 +63,14 @@ const Test = (props) => {
               : "செவிவழி வேறுபாடு"}
           </Heading>
           <Heading fontWeight="800" color="teal" size="xl">
-            நிலை {props.level}: {levelADataES[props.level - 1]["description"]}
+            {content === "envsounds" &&
+              `நிலை ${props.level}: ${
+                levelADataES[props.level - 1]["description"]
+              }`}
+            {content === "music" &&
+              `நிலை ${props.level}: ${
+                levelADataMU[props.level - 1]["description"]
+              }`}
           </Heading>
         </div>
         <Button
