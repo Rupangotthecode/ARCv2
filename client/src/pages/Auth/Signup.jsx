@@ -52,7 +52,6 @@ const Signup = () => {
       loginID: Yup.string().required("Please enter a suitable  username."),
     }),
     onSubmit: (values) => {
-      console.log(values);
       dispatch(signup(values, navigate));
       setStatusIndex(1);
     },

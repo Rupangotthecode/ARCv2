@@ -29,15 +29,14 @@ const AllRoutes = () => {
             />
           }
         />
-        <Route path="/TestA/envsounds" element={<Test page="envsounds" />} />
-        <Route path="/TestA/music" element={<Test page="music" />} />
-        <Route path="/TestA/speech" element={<Test page="speech" />} />
+
         <Route
           path="/TestA/envsounds/TLM"
           element={
             <TestLevelMenu
               levelData={levelADataES}
               heading="செவிவழி விழிப்புணர்வு - சுற்றுச்சூழல் ஒலிகள்"
+              parameter="A_1"
             />
           }
         />
@@ -47,6 +46,7 @@ const AllRoutes = () => {
             <TestLevelMenu
               levelData={levelADataMU}
               heading="செவிவழி விழிப்புணர்வு - இசை"
+              parameter="A_2"
             />
           }
         />
@@ -56,6 +56,7 @@ const AllRoutes = () => {
             <TestLevelMenu
               levelData={levelADataSP}
               heading="செவிவழி விழிப்புணர்வு - பேச்சு"
+              parameter="A_3"
             />
           }
         />

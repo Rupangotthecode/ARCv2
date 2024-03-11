@@ -6,16 +6,19 @@ export const TestAOptions = [
   {
     text: "சுற்றுச்சூழல் ஒலிகள்",
     path: "/TestA/envsounds/TLM",
+    parameter: "A_1",
     ani: environ,
   },
   {
     text: "இசை",
     path: "/TestA/music/TLM",
+    parameter: "A_2",
     ani: music,
   },
   {
     text: "பேச்சு",
     path: "/TestA/speech/TLM",
+    parameter: "A_3",
     ani: speech,
   },
 ];

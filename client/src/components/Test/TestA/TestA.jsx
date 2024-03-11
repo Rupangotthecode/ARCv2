@@ -1,5 +1,5 @@
 import { Button, Heading, Image, useToast } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,15 +12,15 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useDisclosure,
 } from "@chakra-ui/react";
 import "./TestA.css";
 import TranScr from "../TranScr/TranScr";
 import { submitResults } from "../../../actions/results";
+import { flushSync } from "react-dom";
 
 const TestA = (props) => {
   const dispatch = useDispatch();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const User = useSelector((state) => state.currentUserReducer);
 
   const location = useLocation();
@@ -47,14 +47,10 @@ const TestA = (props) => {
   const [points, setPoints] = useState(0);
   const [trial, setTrial] = useState(true);
   const [img, setImg] = useState(null);
-  const [questionStatus, setQuestionStatus] = useState({
-    question: "",
-    t1: false,
-    t2: false,
-    t3: false,
-  });
+  const [questionStatus, setQuestionStatus] = useState();
   const [isModalsubmitOpen, setModalsubmitOpen] = useState(false);
   const [isModalexitOpen, setModalexitOpen] = useState(false);
+  const [submit, setSubmit] = useState(false);
 
   const openModalsubmit = () => setModalsubmitOpen(true);
   const closeModalsubmit = () => setModalsubmitOpen(false);
@@ -62,25 +58,57 @@ const TestA = (props) => {
   const openModalexit = () => setModalexitOpen(true);
   const closeModalexit = () => setModalexitOpen(false);
 
+  const questionStatusRef = useRef(questionStatus);
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    questionStatusRef.current = questionStatus;
+  }, [questionStatus]);
+
   useEffect(() => {
     const audioLink = testData?.[qno]["audio"];
     const encodedAudLink = encodeURIComponent(audioLink);
     const completeAudLink = "http://localhost:5000/audio/get/" + encodedAudLink;
-    setAud((prevState) => ({
-      ...prevState,
-      audio: new Audio(completeAudLink),
-    }));
+    setAud((prevState) => {
+      const audio = new Audio(completeAudLink);
+      audio.onerror = () => {
+        console.error("Audio load error");
+      };
+      return { ...prevState, audio };
+    });
     const imgLink = testData?.[qno]["v_cue"];
     const encodedImgLink = encodeURIComponent(imgLink);
     const completeImgLink = "http://localhost:5000/image/get/" + encodedImgLink;
     setImg(completeImgLink);
-    setQuestionStatus((prevState) => ({
-      ...prevState,
-      question1: testData?.[qno]["name"],
-    }));
+    console.log(testData);
+    // if (testData && questionStatus) {
+    //   setResArray((prevState) => [...prevState, questionStatus]);
+    //   setQuestionStatus({
+    //     question1: testData?.[qno]["name"],
+    //     t1: false,
+    //     t2: false,
+    //     t3: false,
+    //   });
+    // }
+    if (testData?.[qno]["name"] && questionStatusRef.current) {
+      setResArray((prevState) => [...prevState, questionStatusRef.current]);
+      console.log("resArray updated", testData?.[qno]["name"]);
+      setQuestionStatus((prevQuestionStatus) => ({
+        ...prevQuestionStatus,
+        question1: testData?.[qno]["name"],
+        t1: false,
+        t2: false,
+        t3: false,
+      }));
+    }
   }, [qno, testData]);
 
   const handleAnswer = (answer) => {
+    setQuestionStatus((prevQuestionStatus) => ({
+      ...prevQuestionStatus,
+      question1: testData?.[qno]["name"],
+    }));
     if (answer === correctAns) {
       setPoints((oldPoints) => oldPoints + 1);
       if (tno === 1) {
@@ -94,10 +122,12 @@ const TestA = (props) => {
           t2: true,
         }));
       } else {
+        console.log("Here");
         setQuestionStatus((prevState) => ({
           ...prevState,
           t3: true,
         }));
+        console.log(questionStatus);
       }
       resultToast({
         title: "Correct, +1 point",
@@ -111,22 +141,16 @@ const TestA = (props) => {
         isClosable: true,
       });
     }
-
+    console.log("ResArray", resArray);
     if (tno === 3) {
       if (qno === testData?.length - 1) {
-        setResArray((prevState) => [...prevState, questionStatus]);
-        handleSubmit();
+        flushSync(() => {
+          handleSubmit();
+        });
       } else {
         setqno((prevValue) => prevValue + 1);
         settno(0);
         setTrial(false);
-        setResArray((prevState) => [...prevState, questionStatus]);
-        setQuestionStatus({
-          question1: "",
-          t1: false,
-          t2: false,
-          t3: false,
-        });
       }
     }
     settno((prevtno) => prevtno + 1);
@@ -136,7 +160,7 @@ const TestA = (props) => {
       isPlaying: false,
     }));
     setShowTransScr(true);
-    console.log(resArray);
+
     setTimeout(() => {
       setShowTransScr(false);
       setTrial(true);
@@ -175,37 +199,18 @@ const TestA = (props) => {
   };
 
   const handleSubmit = () => {
-    let passed = false;
-    let testName = "";
-    let testCode = "";
-    if (points >= Math.floor(0.7 * (testData?.length - 1) * 3)) {
-      passed = true;
+    if (User?.result?._id) {
+      flushSync(() => {
+        console.log("resArray in submit");
+        setResArray((prevState) => [...prevState, questionStatus]);
+      });
+      flushSync(() => {
+        setSubmit((prevState) => !prevState);
+      });
+      flushSync(() => {
+        setIsSubmitted((prev) => !prev);
+      });
     }
-    if (location.pathname.includes("envsounds")) {
-      testName = "செவிவழி விழிப்புணர்வு - சுற்றுச்சூழல் ஒலிகள்";
-      testCode = "A_1";
-    } else if (location.pathname.includes("music")) {
-      testName = "செவிவழி விழிப்புணர்வு - இசை";
-      testCode = "A_2";
-    }
-    if (location.pathname.includes("speech")) {
-      testName = "செவிவழி விழிப்புணர்வு - பேச்சு";
-      testCode = "A_3";
-    }
-    dispatch(
-      submitResults(
-        User.result._id,
-        User.result.loginID,
-        User.result.name,
-        points,
-        passed,
-        testName,
-        testCode,
-        props.level,
-        resArray,
-        navigate
-      )
-    );
   };
 
   useEffect(() => {
@@ -235,6 +240,71 @@ const TestA = (props) => {
       setCorrectAns(0);
     }
   }, [tno, setCorrectAns]);
+
+  useEffect(() => {
+    // This effect will be triggered whenever resArray is updated.
+
+    if (submit && User?.result?._id && !isSubmitted) {
+      console.log(
+        "inside UE condition",
+        User.result._id,
+        User.result.loginID,
+        User.result.name
+      );
+      let passed = false;
+      let testName = "";
+      let testCode = "";
+
+      // Calculate points and set testName and testCode based on location.pathname
+      if (points >= Math.floor(0 * (testData?.length - 1) * 3)) {
+        passed = true;
+      }
+      if (location.pathname.includes("envsounds")) {
+        testName = "செவிவழி விழிப்புணர்வு - சுற்றுச்சூழல் ஒலிகள்";
+        testCode = "A_1";
+      } else if (location.pathname.includes("music")) {
+        testName = "செவிவழி விழிப்புணர்வு - இசை";
+        testCode = "A_2";
+      }
+      if (location.pathname.includes("speech")) {
+        testName = "செவிவழி விழிப்புணர்வு - பேச்சு";
+        testCode = "A_3";
+      }
+
+      // Dispatch the action with the updated values
+      dispatch(
+        submitResults(
+          User.result._id,
+          User.result.loginID,
+          User.result.name,
+          points,
+          passed,
+          testName,
+          testCode,
+          props.level,
+          resArray,
+          navigate
+        )
+      );
+    }
+  }, [
+    resArray,
+    points,
+    testData,
+    location.pathname,
+    dispatch,
+    navigate,
+    props.level,
+    User.result._id,
+    User.result.loginID,
+    User.result.name,
+    qno,
+    tno,
+    submit,
+    User,
+    questionStatus,
+    isSubmitted,
+  ]);
 
   return (
     <>
@@ -345,6 +415,7 @@ const TestA = (props) => {
                 <Heading color="rgb(244, 254, 255)" size="lg">
                   வெளியேறு
                 </Heading>
+                <Button onClick={() => navigate("/Home")}>Click me</Button>
               </div>
               <Modal
                 isOpen={isModalsubmitOpen}
@@ -372,7 +443,7 @@ const TestA = (props) => {
                     <Button
                       colorScheme="teal"
                       mr={3}
-                      onClick={() => handleSubmit}
+                      onClick={() => handleSubmit()}
                     >
                       ஆம், சமர்ப்பிக்கவும்
                     </Button>

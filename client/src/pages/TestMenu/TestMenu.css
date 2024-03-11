@@ -36,4 +36,8 @@
     background-color: rgb(181, 255, 234);
     border-radius: 40px;
     padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

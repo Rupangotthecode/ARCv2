@@ -1,4 +1,5 @@
 import * as api from "../api";
+import { setCurrentUser } from "./currentUser";
 
 export const submitResults =
   (
@@ -14,6 +15,17 @@ export const submitResults =
     navigate
   ) =>
   async (dispatch) => {
+    console.log(
+      id,
+      loginID,
+      name,
+      score,
+      passed,
+      testName,
+      testCode,
+      testLevel,
+      testData
+    );
     try {
       const { data } = await api.submitResults(
         id,
@@ -28,6 +40,10 @@ export const submitResults =
       );
       dispatch({ type: "SUBMIT_RESULT", payload: data });
       dispatch(getResultWithId(data.resId));
+      dispatch({ type: "AUTH_UPDATE", data: data.user });
+      dispatch(
+        setCurrentUser(JSON.parse(localStorage.getItem("Profile")), true)
+      );
       navigate(`/result/${data.resId}`);
     } catch (error) {
       console.log(error);

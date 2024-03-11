@@ -99,7 +99,7 @@ const QuestionTab = () => {
         ))}
       </div>
       <div className="qt-button-container">
-        <Button onClick={handleSubmit} width="30%">
+        <Button type="submit" onClick={() => handleSubmit()} width="30%">
           Save Responses
         </Button>
       </div>

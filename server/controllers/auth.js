@@ -57,10 +57,8 @@ export const login = async (req, res) => {
 
 export const parentQuesSubmit = async (req, res) => {
   const { id, quesArray } = req.body;
-  console.log(id);
   try {
-    const existinguser = await users.findOne({ id });
-    console.log(existinguser);
+    const existinguser = await users.findById(id);
     quesArray.forEach((obj) => {
       const tempObj = {
         question: obj.question,
@@ -69,7 +67,6 @@ export const parentQuesSubmit = async (req, res) => {
       existinguser.parentQues.push(tempObj);
     });
     await users.findByIdAndUpdate(id, existinguser);
-    console.log("Working");
     res.status(200).json({ result: existinguser });
   } catch (error) {
     res.status(500).json("Something went wrong...");

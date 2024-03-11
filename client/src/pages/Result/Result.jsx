@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Result.css";
-import { Heading } from "@chakra-ui/react";
+import { Button, Heading } from "@chakra-ui/react";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import {
   BarChart,
@@ -16,10 +16,12 @@ import {
 } from "recharts";
 import pass from "../../assets/result/pass.json";
 import fail from "../../assets/result/fail.json";
+import { useNavigate } from "react-router-dom";
 
 const Result = (props) => {
   const resultData = useSelector((state) => state.resultsReducer)?.data;
 
+  const navigate = useNavigate();
   console.log(resultData);
   return (
     <div className="result-main-container">
@@ -78,7 +80,7 @@ const Result = (props) => {
               <BarChart data={resultData.testDetails}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="question1" />
-
+                <YAxis domain={[0, "dataMax"]} />
                 <Tooltip />
                 <Legend />
                 <Bar dataKey="t1" stackId="a" fill="#8884d8" />
@@ -87,6 +89,7 @@ const Result = (props) => {
               </BarChart>
             </ResponsiveContainer>
           </div>
+          <Button onClick={() => navigate("/Home")}>Click me</Button>
         </div>
       )}
     </div>

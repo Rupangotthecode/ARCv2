@@ -2,7 +2,7 @@ import Users from "../models/auth.js";
 import result from "../models/results.js";
 import results from "../models/results.js";
 import { convertDate } from "../utils/date_utils.js";
-import mongoose from "mongoose";
+import { manageUnlocks } from "../utils/results_utils.js";
 
 export const submitResults = async (req, res) => {
   try {
@@ -17,6 +17,7 @@ export const submitResults = async (req, res) => {
       testLevel,
       testData,
     } = req.body;
+
     const new_result = new result({
       userId: id,
       date: convertDate(Date.now()),
@@ -29,24 +30,26 @@ export const submitResults = async (req, res) => {
       passed: passed,
       testDetails: testData,
     });
-
+    console.log(id, loginID, name);
     await new_result.save();
-
-    const user = await Users.findById(id);
+    console.log(passed);
+    let user = await Users.findById(id);
     if (passed) {
-      user.unlocks[testCode] = testLevel + 1;
+      console.log("passed", user.unlocks[testCode]);
+      user = manageUnlocks(user, testCode, testLevel);
     }
     user.results.push(new_result._id);
+    console.log(user);
     await Users.findByIdAndUpdate(id, user);
-
-    res
-      .status(200)
-      .json({
-        message: "Result Submitted Successfully",
-        resId: new_result._id,
-      });
+    console.log("done");
+    res.status(200).json({
+      message: "Result Submitted Successfully",
+      resId: new_result._id,
+      user: user,
+    });
   } catch (error) {
-    res.status(400).json("Error in submitting results");
+    console.log(error);
+    res.status(400).json(`Error in submitting results: ${error}`);
   }
 };
 
