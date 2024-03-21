@@ -7,12 +7,14 @@ import Rules from "../../components/Test/Rules/Rules";
 import { testARules } from "../../const";
 import { levelADataES, levelADataMU } from "../../const";
 import axios from "axios";
+import TestB from "../../components/Test/TestB/TestB";
 
 const Test = (props) => {
   const location = useLocation();
   const [showRules, setShowRules] = useState(true);
 
   let content = "";
+  let testType = "";
 
   if (location.pathname.includes("envsounds")) {
     content = "envsounds";
@@ -20,12 +22,19 @@ const Test = (props) => {
     content = "music";
   } else if (location.pathname.includes("speech")) {
     content = "speech";
+  } else if (location.pathname.includes("diffsounds")) {
+    content = "diffsounds";
   }
 
+  if (location.pathname.includes("TestA")) {
+    testType = "A";
+  } else {
+    testType = "B";
+  }
   const [jsonData, setJsonData] = useState(null);
   useEffect(() => {
     axios
-      .get(`/db_json/A_${content}.json`)
+      .get(`/db_json/${testType}_${content}.json`)
       .then((response) => {
         setJsonData(response.data);
       })
@@ -33,7 +42,7 @@ const Test = (props) => {
       .catch((error) => {
         console.log("Error fetching data:", error);
       });
-  }, []);
+  }, [content, testType]);
 
   const toggleRules = () => {
     setShowRules((prevState) => !prevState);
@@ -63,14 +72,7 @@ const Test = (props) => {
               : "செவிவழி வேறுபாடு"}
           </Heading>
           <Heading fontWeight="800" color="teal" size="xl">
-            {content === "envsounds" &&
-              `நிலை ${props.level}: ${
-                levelADataES[props.level - 1]["description"]
-              }`}
-            {content === "music" &&
-              `நிலை ${props.level}: ${
-                levelADataMU[props.level - 1]["description"]
-              }`}
+            நிலை {props.level}: {levelADataES[props.level - 1]["description"]}
           </Heading>
         </div>
         <Button
@@ -89,7 +91,7 @@ const Test = (props) => {
             location.pathname.includes("TestA") ? (
               <TestA jsonData={jsonData} level={props.level} />
             ) : (
-              <TestA />
+              <TestB jsonData={jsonData} level={props.level} amal={false} />
             ) //Add B
           }
         </div>

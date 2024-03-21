@@ -1,6 +1,8 @@
 import environ from "./assets/TestA/environment.json";
 import music from "./assets/TestA/music.json";
 import speech from "./assets/TestA/speech.json";
+import communication from "./assets/TestB/communication.json";
+import pronunciation from "./assets/TestB/pronunciation.json";
 
 export const TestAOptions = [
   {
@@ -20,6 +22,33 @@ export const TestAOptions = [
     path: "/TestA/speech/TLM",
     parameter: "A_3",
     ani: speech,
+  },
+];
+
+export const TestBOptions = [
+  {
+    text: "ஒலிகலின் வேறுபாட்டை அறிக",
+    path: "/TestB/diffsounds/TLM",
+    parameter: "B_1",
+    ani: environ,
+  },
+  {
+    text: "தமிழ் சத்தங்களை அறிக",
+    path: "/TestB/speech/TLM",
+    parameter: "B_2",
+    ani: speech,
+  },
+  {
+    text: "சொல்லின் தொடர்பு நோக்கத்தின் வேறுபாடு",
+    path: "/TestB/communication/TLM",
+    parameter: "B_3",
+    ani: communication,
+  },
+  {
+    text: "வாய்வழி உச்சரிப்பின் வேறுபாடு - உண்மையான வார்த்தை தயாரிப்புகள",
+    path: "/TestB/pronunciation/TLM",
+    parameter: "B_4",
+    ani: pronunciation,
   },
 ];
 
@@ -118,5 +147,28 @@ export const levelADataSP = [
     level: "4",
     description: "பின்னணி இரைச்சலுடன்",
     path: "/TestA/speech/Level4",
+  },
+];
+
+export const levelBDataDS = [
+  {
+    level: "1",
+    description: "காட்சிக் குறியுடன்",
+    path: "/TestB/diffsounds/Level1",
+  },
+  {
+    level: "2",
+    description: "காட்சி குறிப்பு இல்லாமல்",
+    path: "/TestB/diffsounds/Level2",
+  },
+  {
+    level: "3",
+    description: "தொலைதூர ஒலிகள்",
+    path: "/TestB/diffsounds/Level3",
+  },
+  {
+    level: "4",
+    description: "பின்னணி இரைச்சலுடன்",
+    path: "/TestB/diffsounds/Level4",
   },
 ];

@@ -82,15 +82,6 @@ const TestA = (props) => {
     const completeImgLink = "http://localhost:5000/image/get/" + encodedImgLink;
     setImg(completeImgLink);
     console.log(testData);
-    // if (testData && questionStatus) {
-    //   setResArray((prevState) => [...prevState, questionStatus]);
-    //   setQuestionStatus({
-    //     question1: testData?.[qno]["name"],
-    //     t1: false,
-    //     t2: false,
-    //     t3: false,
-    //   });
-    // }
     if (testData?.[qno]["name"] && questionStatusRef.current) {
       setResArray((prevState) => [...prevState, questionStatusRef.current]);
       console.log("resArray updated", testData?.[qno]["name"]);
@@ -256,7 +247,7 @@ const TestA = (props) => {
       let testCode = "";
 
       // Calculate points and set testName and testCode based on location.pathname
-      if (points >= Math.floor(0 * (testData?.length - 1) * 3)) {
+      if (points >= Math.floor(0.7 * (testData?.length - 1) * 3)) {
         passed = true;
       }
       if (location.pathname.includes("envsounds")) {
@@ -415,7 +406,6 @@ const TestA = (props) => {
                 <Heading color="rgb(244, 254, 255)" size="lg">
                   வெளியேறு
                 </Heading>
-                <Button onClick={() => navigate("/Home")}>Click me</Button>
               </div>
               <Modal
                 isOpen={isModalsubmitOpen}

@@ -5,7 +5,13 @@ import Signup from "./pages/Auth/Signup";
 import { AnimatePresence } from "framer-motion";
 import Home from "./pages/Home/Home";
 import TestMenu from "./pages/TestMenu/TestMenu";
-import { TestAOptions, levelADataMU, levelADataSP } from "./const";
+import {
+  TestAOptions,
+  TestBOptions,
+  levelADataMU,
+  levelADataSP,
+  levelBDataDS,
+} from "./const";
 import Test from "./pages/Test/Test";
 import TestLevelMenu from "./pages/TestLevelMenu/TestLevelMenu";
 import { levelADataES } from "./const";
@@ -29,7 +35,12 @@ const AllRoutes = () => {
             />
           }
         />
-
+        <Route
+          path="/TestB"
+          element={
+            <TestMenu options={TestBOptions} currentTest="செவிவழி வேறுபாடு" />
+          }
+        />
         <Route
           path="/TestA/envsounds/TLM"
           element={
@@ -60,7 +71,16 @@ const AllRoutes = () => {
             />
           }
         />
-
+        <Route
+          path="/TestB/diffsounds/TLM"
+          element={
+            <TestLevelMenu
+              levelData={levelBDataDS}
+              heading="செவிவழி வேறுபாடு - ஒலிகலின் வேறுபாட்டை அறிக"
+              parameter="B_1"
+            />
+          }
+        />
         <Route
           path="/TestA/envsounds/Level1"
           element={<Test page="envsounds" level={1} />}
@@ -95,8 +115,40 @@ const AllRoutes = () => {
           element={<Test page="music" level={4} />}
         />
 
-        <Route path="/TestA/music" element={<Test page="music" />} />
-        <Route path="/TestA/speech" element={<Test page="speech" />} />
+        <Route
+          path="/TestB/envsounds/Level1"
+          element={<Test page="envsounds" level={1} />}
+        />
+        <Route
+          path="/TestB/envsounds/Level2"
+          element={<Test page="envsounds" level={2} />}
+        />
+        <Route
+          path="/TestB/envsounds/Level3"
+          element={<Test page="envsounds" level={3} />}
+        />
+        <Route
+          path="/TestB/envsounds/Level4"
+          element={<Test page="envsounds" level={4} />}
+        />
+
+        <Route
+          path="/TestB/diffsounds/Level1"
+          element={<Test page="diffsounds" level={1} />}
+        />
+        <Route
+          path="/TestB/diffsounds/Level2"
+          element={<Test page="diffsounds" level={2} />}
+        />
+        <Route
+          path="/TestB/diffsounds/Level3"
+          element={<Test page="diffsounds" level={3} />}
+        />
+        <Route
+          path="/TestB/diffsounds/Level4"
+          element={<Test page="diffsounds" level={4} />}
+        />
+
         <Route path="/result/:resId" element={<Result />} />
       </Routes>
     </AnimatePresence>
