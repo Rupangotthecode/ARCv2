@@ -116,23 +116,6 @@ const AllRoutes = () => {
         />
 
         <Route
-          path="/TestB/envsounds/Level1"
-          element={<Test page="envsounds" level={1} />}
-        />
-        <Route
-          path="/TestB/envsounds/Level2"
-          element={<Test page="envsounds" level={2} />}
-        />
-        <Route
-          path="/TestB/envsounds/Level3"
-          element={<Test page="envsounds" level={3} />}
-        />
-        <Route
-          path="/TestB/envsounds/Level4"
-          element={<Test page="envsounds" level={4} />}
-        />
-
-        <Route
           path="/TestB/diffsounds/Level1"
           element={<Test page="diffsounds" level={1} />}
         />

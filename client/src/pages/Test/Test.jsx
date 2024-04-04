@@ -66,17 +66,33 @@ const Test = (props) => {
       )}
       <div className="test-heading-container">
         <div className="test-headers">
-          <Heading fontWeight="800" color="teal" size="2xl">
+          <Heading
+            fontWeight="800"
+            color={
+              location.pathname.includes("TestA")
+                ? "teal"
+                : "rgb(155, 129, 191)"
+            }
+            size="2xl"
+          >
             {location.pathname.includes("TestA")
               ? "செவிவழி விழிப்புணர்வு"
               : "செவிவழி வேறுபாடு"}
           </Heading>
-          <Heading fontWeight="800" color="teal" size="xl">
+          <Heading
+            fontWeight="800"
+            color={
+              location.pathname.includes("TestA")
+                ? "teal"
+                : "rgb(155, 129, 191)"
+            }
+            size="xl"
+          >
             நிலை {props.level}: {levelADataES[props.level - 1]["description"]}
           </Heading>
         </div>
         <Button
-          colorScheme="teal"
+          colorScheme={location.pathname.includes("TestA") ? "teal" : "purple"}
           onClick={toggleRules}
           className="testa-help-button"
           size="lg"

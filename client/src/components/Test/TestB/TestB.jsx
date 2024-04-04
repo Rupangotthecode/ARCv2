@@ -1,4 +1,4 @@
-import { Button, Heading, Image, useToast } from "@chakra-ui/react";
+import { Button, Heading, useToast } from "@chakra-ui/react";
 import React, { useState, useEffect, useRef } from "react";
 import {
   Modal,
@@ -12,11 +12,18 @@ import {
 import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TranScr from "../TranScr/TranScr";
-import { submitResults } from "../../../actions/results";
-import { flushSync } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./TestB.css";
+import {
+  submitResultB,
+  handleSubmit,
+  playpause,
+  handleAnswer,
+  updateResArray,
+  streamAudio,
+  randomizeAnswer,
+} from "../../../utils/TestUtils";
 
 const TestB = (props) => {
   const dispatch = useDispatch();
@@ -37,16 +44,20 @@ const TestB = (props) => {
   }, [props.jsonData, props.level]);
 
   const [resArray, setResArray] = useState([]);
-  const [aud, setAud] = useState({
+  const [aud1, setAud1] = useState({
     audio: null,
     isPlaying: false,
   });
+  const [aud2, setAud2] = useState({
+    audio: null,
+    isPlaying: false,
+  });
+  const [audTracker, setAudTracker] = useState(1);
   const [qno, setqno] = useState(1);
   const [tno, settno] = useState(1);
   const [correctAns, setCorrectAns] = useState();
   const [points, setPoints] = useState(0);
   const [trial, setTrial] = useState(true);
-  const [img, setImg] = useState(null);
   const [questionStatus, setQuestionStatus] = useState();
   const [isModalsubmitOpen, setModalsubmitOpen] = useState(false);
   const [isModalexitOpen, setModalexitOpen] = useState(false);
@@ -67,234 +78,51 @@ const TestB = (props) => {
   }, [questionStatus]);
 
   useEffect(() => {
-    const audioLink = testData?.[qno]["audio"];
-    const encodedAudLink = encodeURIComponent(audioLink);
-    const completeAudLink = "http://localhost:5000/audio/get/" + encodedAudLink;
-    setAud((prevState) => {
-      const audio = new Audio(completeAudLink);
-      audio.onerror = () => {
-        console.error("Audio load error");
-      };
-      return { ...prevState, audio };
-    });
-    const imgLink = testData?.[qno]["v_cue"];
-    const encodedImgLink = encodeURIComponent(imgLink);
-    const completeImgLink = "http://localhost:5000/image/get/" + encodedImgLink;
-    setImg(completeImgLink);
-    console.log(testData);
-    if (testData?.[qno]["name"] && questionStatusRef.current) {
-      setResArray((prevState) => [...prevState, questionStatusRef.current]);
-      console.log("resArray updated", testData?.[qno]["name"]);
-      setQuestionStatus((prevQuestionStatus) => ({
-        ...prevQuestionStatus,
-        question1: testData?.[qno]["name"],
-        t1: false,
-        t2: false,
-        t3: false,
-      }));
-    }
-  }, [qno, testData]);
-
-  const handleAnswer = (answer) => {
-    setQuestionStatus((prevQuestionStatus) => ({
-      ...prevQuestionStatus,
-      question1: testData?.[qno]["name"],
-    }));
-    if (answer === correctAns) {
-      setPoints((oldPoints) => oldPoints + 1);
-      if (tno === 1) {
-        setQuestionStatus((prevState) => ({
-          ...prevState,
-          t1: true,
-        }));
-      } else if (tno === 2) {
-        setQuestionStatus((prevState) => ({
-          ...prevState,
-          t2: true,
-        }));
-      } else {
-        console.log("Here");
-        setQuestionStatus((prevState) => ({
-          ...prevState,
-          t3: true,
-        }));
-        console.log(questionStatus);
-      }
-      resultToast({
-        title: "Correct, +1 point",
-        status: "success",
-        isClosable: true,
-      });
-    } else {
-      resultToast({
-        title: "Incorrect, 0 point",
-        status: "error",
-        isClosable: true,
-      });
-    }
-    console.log("ResArray", resArray);
-    if (tno === 3) {
-      if (qno === testData?.length - 1) {
-        flushSync(() => {
-          handleSubmit();
-        });
-      } else {
-        setqno((prevValue) => prevValue + 1);
-        settno(0);
-        setTrial(false);
-      }
-    }
-    settno((prevtno) => prevtno + 1);
-    aud?.audio?.pause();
-    setAud((prevState) => ({
-      ...prevState,
-      isPlaying: false,
-    }));
-    setShowTransScr(true);
-
-    setTimeout(() => {
-      setShowTransScr(false);
-      setTrial(true);
-    }, 2500);
-  };
-
-  const playpause = (variable, setVariable) => {
-    setVariable((prevState) => {
-      const playState = prevState.isPlaying;
-      if (playState && variable?.audio?.readyState >= 2) {
-        console.log("pausing");
-        try {
-          variable.audio?.pause();
-        } catch (error) {
-          console.log(error);
-          setqno((prevState) => prevState + 1);
-          setqno((prevState) => prevState - 1);
-        }
-      } else {
-        console.log("Playing", variable.audio);
-        try {
-          if (correctAns) {
-            variable.audio.muted = true;
-            variable?.audio?.play();
-          } else {
-            variable.audio.muted = false;
-            variable?.audio?.play();
-          }
-        } catch (error) {
-          setqno((prevState) => prevState + 1);
-          setqno((prevState) => prevState - 1);
-        }
-      }
-      return { ...prevState, isPlaying: !playState };
-    });
-  };
-
-  const handleSubmit = () => {
-    if (User?.result?._id) {
-      flushSync(() => {
-        console.log("resArray in submit");
-        setResArray((prevState) => [...prevState, questionStatus]);
-      });
-      flushSync(() => {
-        setSubmit((prevState) => !prevState);
-      });
-      flushSync(() => {
-        setIsSubmitted((prev) => !prev);
-      });
-    }
-  };
-
-  useEffect(() => {
-    const audioElement = aud.audio;
-    console.log("in");
-    const handleEnded = () => {
-      console.log("Before", aud);
-      setAud((prevState) => ({
-        ...prevState,
-        isPlaying: false,
-      }));
-    };
-
-    audioElement?.addEventListener("ended", handleEnded);
-
-    return () => {
-      audioElement?.removeEventListener("ended", handleEnded);
-    };
-  }, [aud]);
-
-  useEffect(() => {
-    const randomNum = Math.floor(Math.random() * 1000);
-    console.log(randomNum);
-    if (randomNum % 2 === 0) {
-      setCorrectAns(1);
-    } else {
-      setCorrectAns(0);
-    }
+    randomizeAnswer(setCorrectAns);
   }, [tno, setCorrectAns]);
+
+  useEffect(() => {
+    streamAudio(testData, qno, setAud1, correctAns, setAud2);
+  }, [qno, testData, correctAns]);
+
+  useEffect(() => {
+    if (testData?.[qno]["name"] && questionStatusRef.current) {
+      updateResArray(
+        setResArray,
+        questionStatusRef,
+        testData,
+        qno,
+        setQuestionStatus
+      );
+    }
+  }, [qno, setResArray, testData]);
 
   useEffect(() => {
     // This effect will be triggered whenever resArray is updated.
 
     if (submit && User?.result?._id && !isSubmitted) {
-      console.log(
-        "inside UE condition",
-        User.result._id,
-        User.result.loginID,
-        User.result.name
-      );
-      let passed = false;
-      let testName = "";
-      let testCode = "";
-
-      // Calculate points and set testName and testCode based on location.pathname
-      if (points >= Math.floor(0 * (testData?.length - 1) * 3)) {
-        passed = true;
-      }
-      if (location.pathname.includes("envsounds")) {
-        testName = "செவிவழி விழிப்புணர்வு - சுற்றுச்சூழல் ஒலிகள்";
-        testCode = "A_1";
-      } else if (location.pathname.includes("music")) {
-        testName = "செவிவழி விழிப்புணர்வு - இசை";
-        testCode = "A_2";
-      }
-      if (location.pathname.includes("speech")) {
-        testName = "செவிவழி விழிப்புணர்வு - பேச்சு";
-        testCode = "A_3";
-      }
-
-      // Dispatch the action with the updated values
-      dispatch(
-        submitResults(
-          User.result._id,
-          User.result.loginID,
-          User.result.name,
-          points,
-          passed,
-          testName,
-          testCode,
-          props.level,
-          resArray,
-          navigate
-        )
+      submitResultB(
+        User,
+        testData,
+        points,
+        location,
+        dispatch,
+        props.level,
+        resArray,
+        navigate
       );
     }
   }, [
-    resArray,
-    points,
-    testData,
-    location.pathname,
-    dispatch,
-    navigate,
-    props.level,
-    User.result._id,
-    User.result.loginID,
-    User.result.name,
-    qno,
-    tno,
     submit,
     User,
-    questionStatus,
     isSubmitted,
+    testData,
+    points,
+    location,
+    dispatch,
+    props,
+    resArray,
+    navigate,
   ]);
 
   return (
@@ -312,14 +140,35 @@ const TestB = (props) => {
           <div className="testb-question-container">
             <div className="testb-questionTop-container">
               <Heading size="xl" color="rgb(244, 254, 255)">
-                நீங்கள் ஒலி கேட்க முடியுமா?
+                2 ஒலிகளும் வேறுபட்டதா?
               </Heading>
             </div>
             <div className="testb-questionBottom-container">
               <div className="testb-input-container">
                 <div
                   className="testb-option-container"
-                  onClick={() => handleAnswer(0)}
+                  onClick={() =>
+                    handleAnswer(
+                      0,
+                      setQuestionStatus,
+                      testData,
+                      qno,
+                      correctAns,
+                      setPoints,
+                      tno,
+                      questionStatus,
+                      resultToast,
+                      resArray,
+                      setqno,
+                      settno,
+                      setTrial,
+                      aud1,
+                      aud2,
+                      setAud1,
+                      setAud2,
+                      setShowTransScr
+                    )
+                  }
                 >
                   <Heading size="xl" color="rgb(244, 254, 255)">
                     ஆம்
@@ -327,7 +176,28 @@ const TestB = (props) => {
                 </div>
                 <div
                   className="testb-option-container"
-                  onClick={() => handleAnswer(1)}
+                  onClick={() =>
+                    handleAnswer(
+                      1,
+                      setQuestionStatus,
+                      testData,
+                      qno,
+                      correctAns,
+                      setPoints,
+                      tno,
+                      questionStatus,
+                      resultToast,
+                      resArray,
+                      setqno,
+                      settno,
+                      setTrial,
+                      aud1,
+                      aud2,
+                      setAud1,
+                      setAud2,
+                      setShowTransScr
+                    )
+                  }
                 >
                   <Heading size="xl" color="rgb(244, 254, 255)">
                     இல்லை
@@ -337,9 +207,18 @@ const TestB = (props) => {
               <div className="testb-play-container">
                 <div
                   className="testb-play-button"
-                  onClick={() => playpause(aud, setAud)}
+                  onClick={() =>
+                    playpause(
+                      aud1,
+                      setAud1,
+                      aud2,
+                      setAud2,
+                      audTracker,
+                      setAudTracker
+                    )
+                  }
                 >
-                  {aud.isPlaying ? (
+                  {aud1.isPlaying || aud2.isPlaying ? (
                     <FontAwesomeIcon
                       icon={faPause}
                       color="rgb(244, 254, 255)"
@@ -354,38 +233,35 @@ const TestB = (props) => {
                   )}
                 </div>
               </div>
-              {props.level === 1 && (
-                <div className="testb-picture-container">
-                  <Image
-                    src={img}
-                    alt="picture"
-                    boxSize="auto"
-                    width="100%"
-                    height="100%"
-                    borderRadius="30px"
-                  />
-                </div>
-              )}
+              <div className="testb-picture-container">
+                <Heading
+                  size="lg"
+                  color="rgb(155, 129, 191)"
+                  textAlign="center"
+                >
+                  இந்த தேர்வுக்கு காட்சி குறிப்பு இல்லை
+                </Heading>
+              </div>
             </div>
           </div>
           <div className="testb-data-container">
             <div className="testb-databox levelname">
-              <Heading size="lg" color="teal">
+              <Heading size="lg" color="rgb(119, 82, 171)" textAlign="center">
                 ஒலி: {testData?.[qno]["name"]}
               </Heading>
             </div>
             <div className="testb-databox trial">
-              <Heading size="lg" color="teal">
+              <Heading size="lg" color="rgb(119, 82, 171)">
                 சோதனை {tno}/3
               </Heading>
             </div>
             <div className="testb-databox question-number">
-              <Heading size="lg" color="teal">
+              <Heading size="lg" color="rgb(119, 82, 171)">
                 கேள்வி எண்: {qno}/{testData?.length - 1}
               </Heading>
             </div>
             <div className="testb-databox point">
-              <Heading size="lg" color="teal">
+              <Heading size="lg" color="rgb(119, 82, 171)">
                 மொத்த மதிப்பெண்: {points}/{(testData?.length - 1) * 3}
               </Heading>
             </div>
@@ -416,14 +292,16 @@ const TestB = (props) => {
               >
                 <ModalOverlay />
                 <ModalContent>
-                  <ModalHeader>சோதனை சமர்ப்பிக்க?</ModalHeader>
+                  <ModalHeader color="rgb(119, 82, 171)">
+                    சோதனை சமர்ப்பிக்க?
+                  </ModalHeader>
                   <ModalCloseButton />
-                  <ModalBody>
+                  <ModalBody color="rgb(119, 82, 171)">
                     சோதனையைச் சமர்ப்பிக்க விரும்புகிறீர்களா?
                   </ModalBody>
                   <ModalFooter>
                     <Button
-                      colorScheme="teal"
+                      colorScheme="purple"
                       mr={3}
                       variant="ghost"
                       onClick={closeModalsubmit}
@@ -431,9 +309,17 @@ const TestB = (props) => {
                       மூடவும் தொடரவும்
                     </Button>
                     <Button
-                      colorScheme="teal"
+                      colorScheme="purple"
                       mr={3}
-                      onClick={() => handleSubmit()}
+                      onClick={() =>
+                        handleSubmit(
+                          User,
+                          setResArray,
+                          questionStatus,
+                          setSubmit,
+                          setIsSubmitted
+                        )
+                      }
                     >
                       ஆம், சமர்ப்பிக்கவும்
                     </Button>
@@ -449,14 +335,16 @@ const TestB = (props) => {
               >
                 <ModalOverlay />
                 <ModalContent>
-                  <ModalHeader>வெளியேறும் சோதனை?</ModalHeader>
+                  <ModalHeader color="rgb(119, 82, 171)">
+                    வெளியேறும் சோதனை?
+                  </ModalHeader>
                   <ModalCloseButton />
-                  <ModalBody>
+                  <ModalBody color="rgb(119, 82, 171)">
                     தேர்வில் இருந்து வெளியேற விரும்புகிறீர்களா?
                   </ModalBody>
                   <ModalFooter>
                     <Button
-                      colorScheme="teal"
+                      colorScheme="purple"
                       mr={3}
                       variant="ghost"
                       onClick={closeModalexit}
@@ -464,7 +352,7 @@ const TestB = (props) => {
                       மூடவும் தொடரவும்
                     </Button>
                     <Button
-                      colorScheme="teal"
+                      colorScheme="purple"
                       mr={3}
                       onClick={() => navigate("/Home")}
                     >

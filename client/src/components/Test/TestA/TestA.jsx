@@ -354,8 +354,8 @@ const TestA = (props) => {
                   )}
                 </div>
               </div>
-              {props.level === 1 && (
-                <div className="testa-picture-container">
+              <div className="testa-picture-container">
+                {props.level === 1 ? (
                   <Image
                     src={img}
                     alt="picture"
@@ -364,8 +364,12 @@ const TestA = (props) => {
                     height="100%"
                     borderRadius="30px"
                   />
-                </div>
-              )}
+                ) : (
+                  <Heading size="lg" color="teal" textAlign="center">
+                    இந்த தேர்வுக்கு காட்சி குறிப்பு இல்லை
+                  </Heading>
+                )}
+              </div>
             </div>
           </div>
           <div className="testa-data-container">

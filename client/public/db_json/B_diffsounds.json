@@ -1,13 +1,16 @@
 [
     [
         {
+            "level": 1,
+            "instructions": "data/B_diffSounds/Level1/ins.wav",
+            "name": "data/B_diffSounds/Level1/name.wav"
+        },
+        {
             "name": "உரத்த மற்றும் மென்மையான ஒலி",
             "level": 1,
             "name_audio": "data/B_diffSounds/Level1/a_name.wav",
             "audio1": "data/B_diffSounds/Level1/a_1.wav",
             "audio2": "data/B_diffSounds/Level1/a_2.wav",
-            "v_cue1": "data/B_diffSounds/Level1/a_1.gif",
-            "v_cue2": "data/B_diffSounds/Level1/a_2.gif",
             "id": "I.B.1.a"
         },
         {
@@ -16,8 +19,6 @@
             "name_audio": "data/B_diffSounds/Level1/b_name.wav",
             "audio1": "data/B_diffSounds/Level1/b_1.wav",
             "audio2": "data/B_diffSounds/Level1/b_2.wav",
-            "v_cue1": "data/B_diffSounds/Level1/b_1.gif",
-            "v_cue2": "data/B_diffSounds/Level1/b_2.gif",
             "id": "I.B.1.b"
         },
         {
@@ -26,8 +27,6 @@
             "name_audio": "data/B_diffSounds/Level1/c_name.wav",
             "audio1": "data/B_diffSounds/Level1/c_1.wav",
             "audio2": "data/B_diffSounds/Level1/c_2.wav",
-            "v_cue1": "data/B_diffSounds/Level1/c_1.gif",
-            "v_cue2": "data/B_diffSounds/Level1/c_2.gif",
             "id": "I.B.1.c"
         },
         {
@@ -36,8 +35,6 @@
             "name_audio": "data/B_diffSounds/Level1/d_name.wav",
             "audio1": "data/B_diffSounds/Level1/d_1.wav",
             "audio2": "data/B_diffSounds/Level1/d_2.wav",
-            "v_cue1": "data/B_diffSounds/Level1/d_1.gif",
-            "v_cue2": "data/B_diffSounds/Level1/d_2.gif",
             "id": "I.B.1.d"
         },
         {
@@ -46,8 +43,6 @@
             "name_audio": "data/B_diffSounds/Level1/e_name.wav",
             "audio1": "data/B_diffSounds/Level1/e_1.wav",
             "audio2": "data/B_diffSounds/Level1/e_2.wav",
-            "v_cue1": "data/B_diffSounds/Level1/e_1.gif",
-            "v_cue2": "data/B_diffSounds/Level1/e_2.gif",
             "id": "I.B.1.e"
         },
         {
@@ -56,12 +51,15 @@
             "name_audio": "data/B_diffSounds/Level1/f_name.wav",
             "audio1": "data/B_diffSounds/Level1/f_1.wav",
             "audio2": "data/B_diffSounds/Level1/f_2.wav",
-            "v_cue1": "data/B_diffSounds/Level1/f_1.gif",
-            "v_cue2": "data/B_diffSounds/Level1/f_2.gif",
             "id": "I.B.1.f"
         }
     ],
     [
+        {
+            "level": 2,
+            "instructions": "data/B_diffSounds/Level2/ins.wav",
+            "name": "data/B_diffSounds/Level2/name.wav"
+        },
         {
             "name": "உரத்த மற்றும் மென்மையான ஒலி",
             "level": 2,
@@ -113,6 +111,11 @@
     ],
     [
         {
+            "level": 3,
+            "instructions": "data/B_diffSounds/Level3/ins.wav",
+            "name": "data/B_diffSounds/Level3/name.wav"
+        },
+        {
             "name": "உரத்த மற்றும் மென்மையான ஒலி",
             "level": 3,
             "name_audio": "data/B_diffSounds/Level3/a_name.wav",
@@ -130,7 +133,7 @@
         },
         {
             "name": "உயர் மற்றும் குறைந்த சுருதி ஒலி",
-            "level": 3,
+            "level": 4,
             "name_audio": "data/B_diffSounds/Level3/c_name.wav",
             "audio1": "data/B_diffSounds/Level3/c_1.wav",
             "audio2": "data/B_diffSounds/Level3/c_2.wav",
@@ -142,8 +145,6 @@
             "name_audio": "data/B_diffSounds/Level3/d_name.wav",
             "audio1": "data/B_diffSounds/Level3/d_1.wav",
             "audio2": "data/B_diffSounds/Level3/d_2.wav",
-            "v_cue1": "data/B_diffSounds/Level3/d_1.gif",
-            "v_cue2": "data/B_diffSounds/Level3/d_2.gif",
             "id": "III.B.1.d"
         },
         {
@@ -161,56 +162,6 @@
             "audio1": "data/B_diffSounds/Level3/f_1.wav",
             "audio2": "data/B_diffSounds/Level3/f_2.wav",
             "id": "III.B.1.f"
-        }
-    ],
-    [
-        {
-            "name": "உரத்த மற்றும் மென்மையான ஒலி",
-            "level": 4,
-            "name_audio": "data/B_diffSounds/Level4/a_name.wav",
-            "audio1": "data/B_diffSounds/Level4/a_1.wav",
-            "audio2": "data/B_diffSounds/Level4/a_2.wav",
-            "id": "IV.B.1.a"
-        },
-        {
-            "name": "தொடர்ச்சியான மற்றும் திடீர் ஒலி",
-            "level": 4,
-            "name_audio": "data/B_diffSounds/Level4/b_name.wav",
-            "audio1": "data/B_diffSounds/Level4/b_1.wav",
-            "audio2": "data/B_diffSounds/Level4/b_2.wav",
-            "id": "IV.B.1.b"
-        },
-        {
-            "name": "உயர் மற்றும் குறைந்த சுருதி ஒலி",
-            "level": 4,
-            "name_audio": "data/B_diffSounds/Level4/c_name.wav",
-            "audio1": "data/B_diffSounds/Level4/c_1.wav",
-            "audio2": "data/B_diffSounds/Level4/c_2.wav",
-            "id": "IV.B.1.c"
-        },
-        {
-            "name": "அர்த்தமுள்ள சுற்றுச்சூழல் ஒலிகள்",
-            "level": 4,
-            "name_audio": "data/B_diffSounds/Level4/d_name.wav",
-            "audio1": "data/B_diffSounds/Level4/d_1.wav",
-            "audio2": "data/B_diffSounds/Level4/d_2.wav",
-            "id": "IV.B.1.d"
-        },
-        {
-            "name": "ஆண் மற்றும் பெண் குரல்",
-            "level": 4,
-            "name_audio": "data/B_diffSounds/Level4/e_name.wav",
-            "audio1": "data/B_diffSounds/Level4/e_1.wav",
-            "audio2": "data/B_diffSounds/Level4/e_2.wav",
-            "id": "IV.B.1.e"
-        },
-        {
-            "name": "சிறுவன் மற்றும் சிறுமி குரல்",
-            "level": 4,
-            "name_audio": "data/B_diffSounds/Level4/f_name.wav",
-            "audio1": "data/B_diffSounds/Level4/f_1.wav",
-            "audio2": "data/B_diffSounds/Level4/f_2.wav",
-            "id": "IV.B.1.f"
         }
     ]
 ]

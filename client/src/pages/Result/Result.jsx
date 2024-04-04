@@ -89,7 +89,6 @@ const Result = (props) => {
               </BarChart>
             </ResponsiveContainer>
           </div>
-          <Button onClick={() => navigate("/Home")}>Click me</Button>
         </div>
       )}
     </div>
