@@ -15,6 +15,7 @@ const Test = (props) => {
 
   let content = "";
   let testType = "";
+  let amal = undefined;
 
   if (location.pathname.includes("envsounds")) {
     content = "envsounds";
@@ -24,6 +25,8 @@ const Test = (props) => {
     content = "speech";
   } else if (location.pathname.includes("diffsounds")) {
     content = "diffsounds";
+  } else if (location.pathname.includes("communication")) {
+    content = "communication";
   }
 
   if (location.pathname.includes("TestA")) {
@@ -31,6 +34,13 @@ const Test = (props) => {
   } else {
     testType = "B";
   }
+
+  if (location.pathname.includes("diffsounds")) {
+    amal = false;
+  } else {
+    amal = true;
+  }
+
   const [jsonData, setJsonData] = useState(null);
   useEffect(() => {
     axios
@@ -107,7 +117,7 @@ const Test = (props) => {
             location.pathname.includes("TestA") ? (
               <TestA jsonData={jsonData} level={props.level} />
             ) : (
-              <TestB jsonData={jsonData} level={props.level} amal={false} />
+              <TestB jsonData={jsonData} level={props.level} amal={amal} />
             ) //Add B
           }
         </div>

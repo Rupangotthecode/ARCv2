@@ -3,9 +3,9 @@ const resultsReducer = (state = { data: null }, action) => {
     case "SUBMIT_RESULT":
       return { ...state };
     case "GET_RESULT_WITH_ID":
-      console.log({ ...state, data: action.payload });
       return { ...state, data: action.payload };
-
+    case "GET_ALL_RESULTS":
+      return { ...state, data: action.payload };
     default:
       return state;
   }

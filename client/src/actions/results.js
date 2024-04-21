@@ -59,3 +59,12 @@ export const getResultWithId = (resId) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const getAllResults = (userId) => async (dispatch) => {
+  try {
+    const { data } = await api.getAllResults(userId);
+    dispatch({ type: "GET_ALL_RESULTS", payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};

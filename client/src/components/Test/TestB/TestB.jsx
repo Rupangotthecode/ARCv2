@@ -78,12 +78,20 @@ const TestB = (props) => {
   }, [questionStatus]);
 
   useEffect(() => {
-    randomizeAnswer(setCorrectAns);
-  }, [tno, setCorrectAns]);
+    if (!props.amal) {
+      randomizeAnswer(setCorrectAns);
+    } else {
+      randomizeAnswer(setCorrectAns, true);
+    }
+  }, [tno, setCorrectAns, props]);
 
   useEffect(() => {
-    streamAudio(testData, qno, setAud1, correctAns, setAud2);
-  }, [qno, testData, correctAns]);
+    if (!props.amal) {
+      streamAudio(testData, qno, correctAns, setAud1, setAud2);
+    } else {
+      streamAudio(testData, qno, correctAns, setAud1);
+    }
+  }, [qno, testData, correctAns, props]);
 
   useEffect(() => {
     if (testData?.[qno]["name"] && questionStatusRef.current) {
@@ -166,7 +174,8 @@ const TestB = (props) => {
                       aud2,
                       setAud1,
                       setAud2,
-                      setShowTransScr
+                      setShowTransScr,
+                      props.amal
                     )
                   }
                 >
@@ -195,7 +204,8 @@ const TestB = (props) => {
                       aud2,
                       setAud1,
                       setAud2,
-                      setShowTransScr
+                      setShowTransScr,
+                      props.amal
                     )
                   }
                 >
@@ -208,14 +218,16 @@ const TestB = (props) => {
                 <div
                   className="testb-play-button"
                   onClick={() =>
-                    playpause(
-                      aud1,
-                      setAud1,
-                      aud2,
-                      setAud2,
-                      audTracker,
-                      setAudTracker
-                    )
+                    props.amal
+                      ? playpause(aud1, setAud1)
+                      : playpause(
+                          aud1,
+                          setAud1,
+                          aud2,
+                          setAud2,
+                          audTracker,
+                          setAudTracker
+                        )
                   }
                 >
                   {aud1.isPlaying || aud2.isPlaying ? (

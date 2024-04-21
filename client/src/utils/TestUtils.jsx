@@ -133,74 +133,97 @@ export const handleSubmit = (
 export const playpause = (
   variable1,
   setVariable1,
-  variable2,
-  setVariable2,
-  audTracker,
-  setAudTracker
+  variable2 = null,
+  setVariable2 = null,
+  audTracker = null,
+  setAudTracker = null
 ) => {
-  const playState1 = variable1.isPlaying;
-  const playState2 = variable2.isPlaying;
-  if (playState1 && variable1?.audio?.readyState >= 2) {
-    console.log("Pausing Audio");
-    try {
-      variable1.audio?.pause();
-      setVariable1((prevState) => ({ ...prevState, isPlaying: false }));
-    } catch (error) {
-      console.log("Error while pausing audio:", error);
-    }
-  } else if (playState2 && variable2?.audio?.readyState >= 2) {
-    console.log("Pausing Audio");
-    try {
-      variable2.audio?.pause();
-      setVariable2((prevState) => ({ ...prevState, isPlaying: false }));
-      setAudTracker(2);
-    } catch (error) {
-      console.log("Error while pausing audio:", error);
-    }
-  } else if (audTracker === 1) {
-    console.log("Playing Audio:", variable1?.audio);
-    try {
-      variable1.audio?.play();
-      setVariable1((prevState) => ({ ...prevState, isPlaying: true }));
-      variable1.audio?.addEventListener("ended", () => {
+  if (variable2) {
+    const playState1 = variable1.isPlaying;
+    const playState2 = variable2.isPlaying;
+    if (playState1 && variable1?.audio?.readyState >= 2) {
+      console.log("Pausing Audio");
+      try {
+        variable1.audio?.pause();
         setVariable1((prevState) => ({ ...prevState, isPlaying: false }));
-        try {
-          variable2.audio?.play();
-          setVariable2((prevState) => ({ ...prevState, isPlaying: true }));
-          variable2.audio?.addEventListener("ended", () => {
-            console.log("hello");
-            setAudTracker(1);
-            setVariable1((prevState) => ({ ...prevState, isPlaying: false }));
-            setVariable2((prevState) => ({ ...prevState, isPlaying: false }));
-            variable2.audio?.removeEventListener("ended", () => {
-              console.log("removed listener");
+      } catch (error) {
+        console.log("Error while pausing audio:", error);
+      }
+    } else if (playState2 && variable2?.audio?.readyState >= 2) {
+      console.log("Pausing Audio");
+      try {
+        variable2.audio?.pause();
+        setVariable2((prevState) => ({ ...prevState, isPlaying: false }));
+        setAudTracker(2);
+      } catch (error) {
+        console.log("Error while pausing audio:", error);
+      }
+    } else if (audTracker === 1) {
+      console.log("Playing Audio:", variable1?.audio);
+      try {
+        variable1.audio?.play();
+        setVariable1((prevState) => ({ ...prevState, isPlaying: true }));
+        variable1.audio?.addEventListener("ended", () => {
+          setVariable1((prevState) => ({ ...prevState, isPlaying: false }));
+          try {
+            variable2.audio?.play();
+            setVariable2((prevState) => ({ ...prevState, isPlaying: true }));
+            variable2.audio?.addEventListener("ended", () => {
+              console.log("hello");
+              setAudTracker(1);
+              setVariable1((prevState) => ({ ...prevState, isPlaying: false }));
+              setVariable2((prevState) => ({ ...prevState, isPlaying: false }));
+              variable2.audio?.removeEventListener("ended", () => {
+                console.log("removed listener");
+              });
             });
+          } catch (error) {
+            console.log("Error while play audio:", error);
+          }
+          variable1.audio?.removeEventListener("ended", () => {
+            console.log("removed listener");
           });
-        } catch (error) {
-          console.log("Error while play audio:", error);
-        }
-        variable1.audio?.removeEventListener("ended", () => {
-          console.log("removed listener");
         });
-      });
-    } catch (error) {
-      console.log("Error while playing audio:", error);
+      } catch (error) {
+        console.log("Error while playing audio:", error);
+      }
+    } else {
+      try {
+        variable2.audio?.play();
+        setVariable2((prevState) => ({ ...prevState, isPlaying: true }));
+        variable2.audio?.addEventListener("ended", () => {
+          console.log("hello");
+          setAudTracker(1);
+          setVariable1((prevState) => ({ ...prevState, isPlaying: false }));
+          setVariable2((prevState) => ({ ...prevState, isPlaying: false }));
+          variable2.audio?.removeEventListener("ended", () => {
+            console.log("removed listener");
+          });
+        });
+      } catch (error) {
+        console.log("Error while play audio:", error);
+      }
     }
   } else {
-    try {
-      variable2.audio?.play();
-      setVariable2((prevState) => ({ ...prevState, isPlaying: true }));
-      variable2.audio?.addEventListener("ended", () => {
-        console.log("hello");
-        setAudTracker(1);
+    const playState1 = variable1.isPlaying;
+    if (playState1 && variable1?.audio?.readyState >= 2) {
+      console.log("Pausing Audio");
+      try {
+        variable1.audio?.pause();
         setVariable1((prevState) => ({ ...prevState, isPlaying: false }));
-        setVariable2((prevState) => ({ ...prevState, isPlaying: false }));
-        variable2.audio?.removeEventListener("ended", () => {
-          console.log("removed listener");
+      } catch (error) {
+        console.log("Error while pausing audio:", error);
+      }
+    } else {
+      try {
+        variable1.audio?.play();
+        setVariable1((prevState) => ({ ...prevState, isPlaying: true }));
+        variable1.audio?.addEventListener("ended", () => {
+          setVariable1((prevState) => ({ ...prevState, isPlaying: false }));
         });
-      });
-    } catch (error) {
-      console.log("Error while play audio:", error);
+      } catch (error) {
+        console.log("Error while playing audio:", error);
+      }
     }
   }
 };
@@ -223,8 +246,16 @@ export const handleAnswer = (
   aud2,
   setAud1,
   setAud2,
-  setShowTransScr
+  setShowTransScr,
+  amal
 ) => {
+  if (amal) {
+    if (correctAns === 1) {
+      correctAns = 0;
+    } else {
+      correctAns = 1;
+    }
+  }
   setQuestionStatus((prevQuestionStatus) => ({
     ...prevQuestionStatus,
     question1: testData?.[qno]["name"],
@@ -279,12 +310,14 @@ export const handleAnswer = (
     ...prevState,
     isPlaying: false,
   }));
+  if (!amal) {
+    aud2?.audio?.pause();
+    setAud2((prevState) => ({
+      ...prevState,
+      isPlaying: false,
+    }));
+  }
 
-  aud2?.audio?.pause();
-  setAud2((prevState) => ({
-    ...prevState,
-    isPlaying: false,
-  }));
   setShowTransScr(true);
 
   setTimeout(() => {
@@ -311,40 +344,109 @@ export const updateResArray = (
   }));
 };
 
-export const streamAudio = (testData, qno, setAud1, correctAns, setAud2) => {
-  const audioLink1 = testData?.[qno]["audio1"];
-  const encodedAudLink1 = encodeURIComponent(audioLink1);
-  const completeAudLink1 = "http://localhost:5000/audio/get/" + encodedAudLink1;
-  setAud1((prevState) => {
-    const audio = new Audio(completeAudLink1);
-    audio.onerror = () => {
-      console.error("Audio load error");
-    };
-    return { ...prevState, audio };
-  });
-  let audioLink2 = "";
-  if (correctAns) {
-    audioLink2 = testData?.[qno]["audio1"];
+export const streamAudio = (
+  testData,
+  qno,
+  correctAns,
+  setAud1,
+  setAud2 = undefined
+) => {
+  if (setAud2) {
+    const audioLink1 = testData?.[qno]["audio1"];
+    const encodedAudLink1 = encodeURIComponent(audioLink1);
+    const completeAudLink1 =
+      "http://localhost:5000/audio/get/" + encodedAudLink1;
+    setAud1((prevState) => {
+      const audio = new Audio(completeAudLink1);
+      audio.onerror = () => {
+        console.error("Audio load error");
+      };
+      return { ...prevState, audio };
+    });
+    let audioLink2 = "";
+    if (correctAns) {
+      audioLink2 = testData?.[qno]["audio1"];
+    } else {
+      audioLink2 = testData?.[qno]["audio2"];
+    }
+    const encodedAudLink2 = encodeURIComponent(audioLink2);
+    const completeAudLink2 =
+      "http://localhost:5000/audio/get/" + encodedAudLink2;
+    setAud2((prevState) => {
+      const audio = new Audio(completeAudLink2);
+      audio.onerror = () => {
+        console.error("Audio load error");
+      };
+      return { ...prevState, audio };
+    });
   } else {
-    audioLink2 = testData?.[qno]["audio2"];
+    if (correctAns === 1) {
+      const audioLink1 = testData?.[qno]["trial1"];
+      const encodedAudLink1 = encodeURIComponent(audioLink1);
+      const completeAudLink1 =
+        "http://localhost:5000/audio/get/" + encodedAudLink1;
+      setAud1((prevState) => {
+        const audio = new Audio(completeAudLink1);
+        audio.onerror = () => {
+          console.error("Audio load error");
+        };
+        return { ...prevState, audio };
+      });
+    } else if (correctAns === 2) {
+      const audioLink1 = testData?.[qno]["trial2"];
+      const encodedAudLink1 = encodeURIComponent(audioLink1);
+      const completeAudLink1 =
+        "http://localhost:5000/audio/get/" + encodedAudLink1;
+      setAud1((prevState) => {
+        const audio = new Audio(completeAudLink1);
+        audio.onerror = () => {
+          console.error("Audio load error");
+        };
+        return { ...prevState, audio };
+      });
+    } else {
+      const audioLink1 = testData?.[qno]["trial3"];
+      const encodedAudLink1 = encodeURIComponent(audioLink1);
+      const completeAudLink1 =
+        "http://localhost:5000/audio/get/" + encodedAudLink1;
+      setAud1((prevState) => {
+        const audio = new Audio(completeAudLink1);
+        audio.onerror = () => {
+          console.error("Audio load error");
+        };
+        return { ...prevState, audio };
+      });
+    }
   }
-  const encodedAudLink2 = encodeURIComponent(audioLink2);
-  const completeAudLink2 = "http://localhost:5000/audio/get/" + encodedAudLink2;
-  setAud2((prevState) => {
-    const audio = new Audio(completeAudLink2);
-    audio.onerror = () => {
-      console.error("Audio load error");
-    };
-    return { ...prevState, audio };
-  });
 };
 
-export const randomizeAnswer = (setCorrectAns) => {
-  const randomNum = Math.floor(Math.random() * 1000);
-  console.log(randomNum);
-  if (randomNum % 2 === 0) {
-    setCorrectAns(1);
+export const randomizeAnswer = (setCorrectAns, amal = false) => {
+  if (!amal) {
+    const randomNum = Math.floor(Math.random() * 1000);
+    console.log(randomNum);
+    if (randomNum % 2 === 0) {
+      setCorrectAns(1);
+    } else {
+      setCorrectAns(0);
+    }
   } else {
-    setCorrectAns(0);
+    let randomNum;
+    const randomNumber = Math.random(); // Generate a random number between 0 and 1
+
+    if (randomNumber < 1 / 2) {
+      randomNum = 1; // Set randomNum to 1 with probability 1/3
+    } else if (randomNumber < 3 / 4 && randomNumber > 1 / 2) {
+      randomNum = 2; // Set randomNum to 2 with probability 1/3
+    } else {
+      randomNum = 3; // Set randomNum to 3 with probability 1/3
+    }
+    console.log("amal mode", randomNum);
+    if (randomNum === 1) {
+      setCorrectAns(1);
+    } else if (randomNum === 2) {
+      setCorrectAns(2);
+    } else {
+      setCorrectAns(3);
+    }
   }
 };

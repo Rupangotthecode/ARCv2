@@ -16,6 +16,7 @@ import Test from "./pages/Test/Test";
 import TestLevelMenu from "./pages/TestLevelMenu/TestLevelMenu";
 import { levelADataES } from "./const";
 import Result from "./pages/Result/Result";
+import Profile from "./pages/Profile/Profile";
 
 const AllRoutes = () => {
   const location = useLocation();
@@ -127,12 +128,35 @@ const AllRoutes = () => {
           path="/TestB/diffsounds/Level3"
           element={<Test page="diffsounds" level={3} />}
         />
+
         <Route
-          path="/TestB/diffsounds/Level4"
-          element={<Test page="diffsounds" level={4} />}
+          path="/TestB/speech/Level1"
+          element={<Test page="speech" level={1} />}
+        />
+        <Route
+          path="/TestB/speech/Level2"
+          element={<Test page="speech" level={2} />}
+        />
+        <Route
+          path="/TestB/speech/Level3"
+          element={<Test page="speech" level={3} />}
+        />
+
+        <Route
+          path="/TestB/communication/Level1"
+          element={<Test page="communication" level={1} />}
+        />
+        <Route
+          path="/TestB/communication/Level2"
+          element={<Test page="communication" level={2} />}
+        />
+        <Route
+          path="/TestB/communication/Level3"
+          element={<Test page="communication" level={3} />}
         />
 
         <Route path="/result/:resId" element={<Result />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </AnimatePresence>
   );

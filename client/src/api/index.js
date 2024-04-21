@@ -42,3 +42,6 @@ export const submitResults = (
 
 export const getResultWithId = (resId) =>
   API.get(`/results/getresult/${resId}`);
+
+export const getAllResults = (userId) =>
+  API.get(`/results/getAllresults/${userId}`);

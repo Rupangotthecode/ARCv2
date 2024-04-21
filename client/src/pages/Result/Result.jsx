@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Result.css";
@@ -16,13 +16,23 @@ import {
 } from "recharts";
 import pass from "../../assets/result/pass.json";
 import fail from "../../assets/result/fail.json";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getResultWithId } from "../../actions/results";
 
 const Result = (props) => {
   const resultData = useSelector((state) => state.resultsReducer)?.data;
+  const resultId = useParams().resId;
+  console.log(resultId);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   console.log(resultData);
+
+  useEffect(() => {
+    dispatch(getResultWithId(resultId));
+  }, [resultId, dispatch]);
   return (
     <div className="result-main-container">
       <Navbar
