@@ -62,3 +62,13 @@ export const getResultWithId = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const getAllResults = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const resultsList = await results.find({ userId: userId });
+    res.status(200).json(resultsList);
+  } catch (error) {
+    res.status(400).message("error finding results:", error.message);
+  }
+};
