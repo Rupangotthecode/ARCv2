@@ -3,7 +3,6 @@ import AllRoutes from "./AllRoutes";
 import { ChakraProvider } from "@chakra-ui/react";
 import { useEffect } from "react";
 import "./App.css";
-import { persistLogin } from "./actions/auth";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "./actions/currentUser";
 

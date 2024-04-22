@@ -42,6 +42,19 @@ export const login = (authData, navigate) => async (dispatch) => {
   }
 };
 
+export const logout = (navigate) => async (dispatch) => {
+  try {
+    console.log("inside logout");
+    localStorage.removeItem("Profile");
+    dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
+    if (navigate) {
+      navigate("/");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const persistLogin = () => async (dispatch) => {
   try {
     // const authData = JSON.parse(localStorage.getItem("Profile")).result;

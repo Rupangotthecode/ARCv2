@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup";
 import { AnimatePresence } from "framer-motion";
@@ -17,9 +17,50 @@ import TestLevelMenu from "./pages/TestLevelMenu/TestLevelMenu";
 import { levelADataES } from "./const";
 import Result from "./pages/Result/Result";
 import Profile from "./pages/Profile/Profile";
+import { useDispatch } from "react-redux";
+import { logout } from "./actions/auth";
 
 const AllRoutes = () => {
   const location = useLocation();
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const logoutTimerRef = useRef(null);
+
+  useEffect(() => {
+    const resetLogoutTimer = () => {
+      clearTimeout(logoutTimerRef.current);
+      logoutTimerRef.current = setTimeout(() => {
+        // Call your logout logic here
+        // Assuming you're using Redux for state management
+        dispatch(logout(navigate));
+      }, 5 * 60 * 1000); // 15 minutes in milliseconds
+    };
+
+    // Event listeners to track user activity
+    const setupEventListeners = () => {
+      // Reset the logout timer on user activity
+      window.addEventListener("mousemove", resetLogoutTimer);
+      window.addEventListener("keydown", resetLogoutTimer);
+      window.addEventListener("scroll", resetLogoutTimer);
+    };
+
+    const initializeLogoutTimer = () => {
+      setupEventListeners();
+      resetLogoutTimer();
+    };
+
+    initializeLogoutTimer();
+
+    // Cleanup function to remove event listeners
+    return () => {
+      window.removeEventListener("mousemove", resetLogoutTimer);
+      window.removeEventListener("keydown", resetLogoutTimer);
+      window.removeEventListener("scroll", resetLogoutTimer);
+    };
+  }, [dispatch, navigate]);
 
   return (
     <AnimatePresence>

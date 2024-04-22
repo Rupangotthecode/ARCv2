@@ -14,18 +14,15 @@ import { useToast } from "@chakra-ui/react";
 
 const Profile = () => {
   const User = useSelector((state) => state.currentUserReducer)?.result;
-  console.log(User);
   const userId = User?._id;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllResults(userId));
   }, [userId, dispatch]);
-  const results = useSelector((state) => state.resultsReducer).data;
-  console.log(results);
+  const results = useSelector((state) => state.allResultsReducer).data;
   let heatmapData = [];
-  if (results.length > 0) {
+  if (results?.length > 0) {
     heatmapData = countExamsByDate(results);
-    console.log(heatmapData);
   }
   const toast = useToast();
 
@@ -44,51 +41,49 @@ const Profile = () => {
         </div>
         <div className="profile-right-container">
           <div className="profile-top-container">
-            {results?.length > 0 && <RecentResults results={results} />}
+            <RecentResults results={results} />
           </div>
-          {heatmapData.length > 0 && (
-            <div className="profile-bottom-container">
-              <div className="profile-heatmap-heading">
-                <Heading
-                  size="lg"
-                  fontWeight="normal"
-                  color="teal"
-                  textAlign="left"
-                >
-                  செயல்பாடு
-                </Heading>
-              </div>
-              <div className="profile-heatmap-container">
-                <CalendarHeatmap
-                  startDate={new Date("2024-01-01")}
-                  endDate={new Date("2024-12-31")}
-                  gutterSize={2}
-                  onClick={(value) =>
-                    value?.date
-                      ? toast({
-                          description: value?.date
-                            ? `${value?.date} அன்று நீங்கள் ${value?.value} சோதனைகளை முடித்தீர்கள்`
-                            : ``,
-                          status: `info`,
-                        })
-                      : null
-                  }
-                  values={heatmapData}
-                  titleForValue={(value) =>
-                    value?.date
-                      ? `On ${value?.date}, you completed ${value?.value} tests`
-                      : ""
-                  }
-                  classForValue={(value) => {
-                    if (!value) {
-                      return "color-empty";
-                    }
-                    return `color-scale-${value.value}`;
-                  }}
-                />
-              </div>
+          <div className="profile-bottom-container">
+            <div className="profile-heatmap-heading">
+              <Heading
+                size="lg"
+                fontWeight="normal"
+                color="teal"
+                textAlign="left"
+              >
+                செயல்பாடு
+              </Heading>
             </div>
-          )}
+            <div className="profile-heatmap-container">
+              <CalendarHeatmap
+                startDate={new Date("2024-01-01")}
+                endDate={new Date("2024-12-31")}
+                gutterSize={2}
+                onClick={(value) =>
+                  value?.date
+                    ? toast({
+                        description: value?.date
+                          ? `${value?.date} அன்று நீங்கள் ${value?.value} சோதனைகளை முடித்தீர்கள்`
+                          : ``,
+                        status: `info`,
+                      })
+                    : null
+                }
+                values={heatmapData}
+                titleForValue={(value) =>
+                  value?.date
+                    ? `On ${value?.date}, you completed ${value?.value} tests`
+                    : ""
+                }
+                classForValue={(value) => {
+                  if (!value) {
+                    return "color-empty";
+                  }
+                  return `color-scale-${value.value}`;
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

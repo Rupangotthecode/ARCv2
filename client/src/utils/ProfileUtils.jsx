@@ -1,7 +1,6 @@
 export const countExamsByDate = (exams) => {
   // Create an empty object to store counts for each date
   var counts = {};
-  console.log(exams);
   // Iterate over each exam
   exams.forEach((exam) => {
     // Extract the date from the exam object
@@ -21,7 +20,6 @@ export const countExamsByDate = (exams) => {
     return { date: date, value: counts[date] };
   });
 
-  console.log(result);
   return result;
 };
 
