@@ -1,0 +1,35 @@
+.rules-main-container{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(223, 255, 255);
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2%;
+    gap: 2%;
+    color: teal;
+    z-index: 1;
+}
+
+.rules-heading-container{
+    width: 100%;
+    height: auto;
+    border-bottom: 2px solid teal;
+    padding-bottom: 1%;
+}
+
+.rules-content-container{
+    width: 100%;
+    height: auto;   
+}
+
+.rules-button-container {
+    position: fixed;
+    bottom: 30px; /* Adjust the value according to your design */
+    right: 30px; /* Adjust the value according to your design */
+  }

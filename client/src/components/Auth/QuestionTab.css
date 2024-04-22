@@ -1,0 +1,29 @@
+.qt-main-container{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.qt-content-container{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.qt-button-container{
+    width: 100%
+}
+
+.qb-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 2%;
+    border: 2px dotted purple;
+    border-radius: 30px;
+}

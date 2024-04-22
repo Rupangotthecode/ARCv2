@@ -1,0 +1,153 @@
+.testa-main-container{
+    height: 100%;
+    border: 5px solid teal;
+    border-radius: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1%;
+    padding: 1.5%;
+}
+
+.testa-question-container{
+    height: 100%;
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    gap: 4%;
+}
+
+.testa-questionTop-container{
+    height: 25%;
+    width:  100%;
+    background-color: teal;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.testa-questionBottom-container{
+    height: 72%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
+}
+
+.testa-input-container{
+    border: 4px dotted teal;
+    height: 100%;
+    width: 35%;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 2%;
+}
+
+@keyframes colorChangeA {
+    0% {
+      background-color: teal;
+    }
+    50% {
+      background-color: darkcyan; /* Change this to the darker shade you want */
+    }
+    100% {
+      background-color: teal;
+    }
+} 
+.testa-option-container{
+    height: 30%;
+    width: 80%;
+    background-color: teal;
+    animation: colorChangeA 0.8s infinite;
+    border-radius: 30px;
+    box-shadow: 0px 0px 3px 4px rgb(255, 255, 255), 0px 0px 6px 5px rgba(61, 61, 61, 0.766);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.testa-play-container{
+    height: 100%;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.testa-play-button{
+    height: 200px;
+    width: 200px;
+    background-color: teal;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 3px 4px rgb(255, 255, 255), 0px 0px 6px 5px rgba(61, 61, 61, 0.766);
+}
+
+.testa-picture-container{
+    height: 100%;
+    width: 40%;
+    flex: 1;
+    border: 4px dotted teal;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.testa-data-container{
+    height: 100%;
+    flex: 1;
+    border: 4px dashed teal;
+    border-radius: 30px;
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.testa-databox{
+    height: 15%;
+    width: 100%;
+    padding: 2%;
+    border: 3px dotted teal;
+    border-radius: 30px;
+    display:  flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1%;
+}
+
+
+.testa-exitbtn{
+    background-color: teal;
+    box-shadow: 0px 0px 3px 4px rgb(255, 255, 255), 0px 0px 6px 5px rgba(61, 61, 61, 0.766);
+    width: 100%;
+    height: 40%;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.exit-buttons{
+    height: 30%;
+    display: flex;
+    gap: 20%;
+    padding: 4%;
+}
+
+.testa-help-button{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
