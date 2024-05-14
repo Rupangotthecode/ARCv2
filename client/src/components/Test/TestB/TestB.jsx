@@ -87,11 +87,18 @@ const TestB = (props) => {
 
   useEffect(() => {
     if (!props.amal) {
-      streamAudio(testData, qno, correctAns, setAud1, setAud2);
+      streamAudio(
+        testData,
+        qno,
+        correctAns,
+        User?.result.volume,
+        setAud1,
+        setAud2
+      );
     } else {
-      streamAudio(testData, qno, correctAns, setAud1);
+      streamAudio(testData, qno, correctAns, User?.result.volume, setAud1);
     }
-  }, [qno, testData, correctAns, props]);
+  }, [qno, testData, correctAns, props, User]);
 
   useEffect(() => {
     if (testData?.[qno]["name"] && questionStatusRef.current) {
@@ -205,7 +212,11 @@ const TestB = (props) => {
                       setAud1,
                       setAud2,
                       setShowTransScr,
-                      props.amal
+                      props.amal,
+                      User,
+                      setResArray,
+                      setSubmit,
+                      setIsSubmitted
                     )
                   }
                 >

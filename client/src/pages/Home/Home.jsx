@@ -15,7 +15,7 @@ const Home = () => {
     { gif: aud_awar, text: "செவிவழி விழிப்புணர்வு", link: "/TestA" },
     { gif: aud_disc, text: "செவிவழி வேறுபாடு", link: "/TestB" },
     { gif: results, text: "சோதனை பகுப்பாய்வு", link: "/Home" },
-    { gif: settings, text: "அமைப்புகள்", link: "/Home" },
+    { gif: settings, text: "அமைப்புகள்", link: "/Settings" },
   ];
   const [admin, setAdmin] = useState(true);
 

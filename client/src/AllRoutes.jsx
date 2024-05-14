@@ -10,7 +10,9 @@ import {
   TestBOptions,
   levelADataMU,
   levelADataSP,
+  levelBDataCM,
   levelBDataDS,
+  levelBDataSP,
 } from "./const";
 import Test from "./pages/Test/Test";
 import TestLevelMenu from "./pages/TestLevelMenu/TestLevelMenu";
@@ -19,6 +21,7 @@ import Result from "./pages/Result/Result";
 import Profile from "./pages/Profile/Profile";
 import { useDispatch } from "react-redux";
 import { logout } from "./actions/auth";
+import Settings from "./pages/Settings/Settings";
 
 const AllRoutes = () => {
   const location = useLocation();
@@ -68,6 +71,7 @@ const AllRoutes = () => {
         <Route path="/" element={<Login />} />
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Home" element={<Home />} />
+        <Route path="/Settings" element={<Settings />} />
         <Route
           path="/TestA"
           element={
@@ -120,6 +124,26 @@ const AllRoutes = () => {
               levelData={levelBDataDS}
               heading="செவிவழி வேறுபாடு - ஒலிகலின் வேறுபாட்டை அறிக"
               parameter="B_1"
+            />
+          }
+        />
+        <Route
+          path="/TestB/speech/TLM"
+          element={
+            <TestLevelMenu
+              levelData={levelBDataSP}
+              heading="செவிவழி வேறுபாடு - தமிழ் சத்தங்களை அறிக"
+              parameter="B_2"
+            />
+          }
+        />
+        <Route
+          path="/TestB/communication/TLM"
+          element={
+            <TestLevelMenu
+              levelData={levelBDataCM}
+              heading="செவிவழி வேறுபாடு - சொல்லின் தொடர்பு நோக்கத்தின் வேறுபாடு"
+              parameter="B_3"
             />
           }
         />

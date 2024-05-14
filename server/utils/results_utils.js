@@ -8,9 +8,6 @@ export const manageUnlocks = (user, testCode, testLevel) => {
           user.unlocks["A_2"] = 1;
           break;
         case "A_2":
-          user.unlocks["A_3"] = 1;
-          break;
-        case "A_3":
           user.unlocks["B_1"] = 1;
           break;
         default:
@@ -25,10 +22,7 @@ export const manageUnlocks = (user, testCode, testLevel) => {
           user.unlocks["B_3"] = 1;
           break;
         case "B_3":
-          user.unlocks["B_4"] = 1;
-          break;
-        case "B_4":
-          user.unlocks["B_4"] = 4;
+          user.unlocks["B_3"] = 1;
           break;
         default:
           break;

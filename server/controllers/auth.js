@@ -72,3 +72,15 @@ export const parentQuesSubmit = async (req, res) => {
     res.status(500).json("Something went wrong...");
   }
 };
+
+export const changeVolume = async (req, res) => {
+  const { id, volume } = req.body;
+  try {
+    const existinguser = await users.findById(id);
+    existinguser.volume = volume;
+    await users.findByIdAndUpdate(id, existinguser);
+    res.status(200).json({ result: existinguser });
+  } catch (error) {
+    res.status(400).json("Something went wrong...");
+  }
+};

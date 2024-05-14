@@ -247,7 +247,11 @@ export const handleAnswer = (
   setAud1,
   setAud2,
   setShowTransScr,
-  amal
+  amal,
+  User,
+  setResArray,
+  setSubmit,
+  setIsSubmitted
 ) => {
   if (amal) {
     if (correctAns === 1) {
@@ -273,7 +277,6 @@ export const handleAnswer = (
         t2: true,
       }));
     } else {
-      console.log("Here");
       setQuestionStatus((prevState) => ({
         ...prevState,
         t3: true,
@@ -294,9 +297,18 @@ export const handleAnswer = (
   }
   console.log("ResArray", resArray);
   if (tno === 3) {
+    console.log("Hello There!", testData?.length - 1, qno);
     if (qno === testData?.length - 1) {
+      console.log("Hello There!Im in", testData?.length - 1, qno);
       flushSync(() => {
-        handleSubmit();
+        console.log("Hello There!Im in deep", testData?.length - 1, qno);
+        handleSubmit(
+          User,
+          setResArray,
+          questionStatus,
+          setSubmit,
+          setIsSubmitted
+        );
       });
     } else {
       setqno((prevValue) => prevValue + 1);
@@ -348,6 +360,7 @@ export const streamAudio = (
   testData,
   qno,
   correctAns,
+  volume,
   setAud1,
   setAud2 = undefined
 ) => {
@@ -358,6 +371,7 @@ export const streamAudio = (
       "http://localhost:5000/audio/get/" + encodedAudLink1;
     setAud1((prevState) => {
       const audio = new Audio(completeAudLink1);
+      audio.volume = volume / 100;
       audio.onerror = () => {
         console.error("Audio load error");
       };

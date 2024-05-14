@@ -22,6 +22,7 @@ const userSchema = mongoose.Schema({
     B_4: { type: Number, default: 0 },
   },
   results: [{ type: String }],
+  volume: { type: Number, default: 50 },
 });
 
 export default mongoose.model("User", userSchema);

@@ -2,7 +2,6 @@ import environ from "./assets/TestA/environment.json";
 import music from "./assets/TestA/music.json";
 import speech from "./assets/TestA/speech.json";
 import communication from "./assets/TestB/communication.json";
-import pronunciation from "./assets/TestB/pronunciation.json";
 
 export const TestAOptions = [
   {
@@ -16,12 +15,6 @@ export const TestAOptions = [
     path: "/TestA/music/TLM",
     parameter: "A_2",
     ani: music,
-  },
-  {
-    text: "பேச்சு",
-    path: "/TestA/speech/TLM",
-    parameter: "A_3",
-    ani: speech,
   },
 ];
 
@@ -43,12 +36,6 @@ export const TestBOptions = [
     path: "/TestB/communication/TLM",
     parameter: "B_3",
     ani: communication,
-  },
-  {
-    text: "வாய்வழி உச்சரிப்பின் வேறுபாடு - உண்மையான வார்த்தை தயாரிப்புகள",
-    path: "/TestB/pronunciation/TLM",
-    parameter: "B_4",
-    ani: pronunciation,
   },
 ];
 
@@ -153,22 +140,53 @@ export const levelADataSP = [
 export const levelBDataDS = [
   {
     level: "1",
-    description: "காட்சிக் குறியுடன்",
+    description: "காட்சி குறிப்பு இல்லாமல்",
     path: "/TestB/diffsounds/Level1",
   },
   {
     level: "2",
-    description: "காட்சி குறிப்பு இல்லாமல்",
+    description: "தொலைதூர ஒலிகள்",
     path: "/TestB/diffsounds/Level2",
   },
   {
     level: "3",
-    description: "தொலைதூர ஒலிகள்",
+    description: "பின்னணி இரைச்சலுடன்",
     path: "/TestB/diffsounds/Level3",
   },
+];
+
+export const levelBDataCM = [
   {
-    level: "4",
+    level: "1",
+    description: "காட்சி குறிப்பு இல்லாமல்",
+    path: "/TestB/communication/Level1",
+  },
+  {
+    level: "2",
+    description: "தொலைதூர ஒலிகள்",
+    path: "/TestB/communication/Level2",
+  },
+  {
+    level: "3",
     description: "பின்னணி இரைச்சலுடன்",
-    path: "/TestB/diffsounds/Level4",
+    path: "/TestB/communication/Level3",
+  },
+];
+
+export const levelBDataSP = [
+  {
+    level: "1",
+    description: "காட்சி குறிப்பு இல்லாமல்",
+    path: "/TestB/speech/Level1",
+  },
+  {
+    level: "2",
+    description: "தொலைதூர ஒலிகள்",
+    path: "/TestB/speech/Level2",
+  },
+  {
+    level: "3",
+    description: "பின்னணி இரைச்சலுடன்",
+    path: "/TestB/speech/Level3",
   },
 ];

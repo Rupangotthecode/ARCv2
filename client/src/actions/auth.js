@@ -75,3 +75,13 @@ export const postParentQues = (id, quesArray, navigate) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const changeVolume = (id, volume) => async (dispatch) => {
+  try {
+    const { data } = await api.changeVolume({ id, volume });
+    dispatch({ type: "AUTH", data });
+    dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
+  } catch (error) {
+    console.log(error);
+  }
+};

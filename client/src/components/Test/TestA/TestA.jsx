@@ -93,7 +93,7 @@ const TestA = (props) => {
         t3: false,
       }));
     }
-  }, [qno, testData]);
+  }, [qno, testData, User]);
 
   const handleAnswer = (answer) => {
     setQuestionStatus((prevQuestionStatus) => ({
@@ -178,6 +178,9 @@ const TestA = (props) => {
             variable?.audio?.play();
           } else {
             variable.audio.muted = false;
+            if (variable?.audio) {
+              variable.audio.volume = User?.result.volume / 100;
+            }
             variable?.audio?.play();
           }
         } catch (error) {

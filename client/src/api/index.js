@@ -14,6 +14,9 @@ API.interceptors.request.use((req) => {
 export const logIn = (authData) => API.post("/user/login", authData); //send the user dat to the server and receive the corresponding token and acknowledgemnet for each individual profile data.
 export const signUp = (authData) => API.post("/user/signup", authData);
 
+export const changeVolume = ({ id, volume }) =>
+  API.post("user/changeVolume", { id, volume });
+
 export const postParentQues = (quesData) =>
   API.post("/user/PQsubmit", quesData);
 
