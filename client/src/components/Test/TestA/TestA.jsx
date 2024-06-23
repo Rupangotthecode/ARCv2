@@ -272,6 +272,7 @@ const TestA = (props) => {
           User.result.loginID,
           User.result.name,
           points,
+          (testData?.length - 1) * 3,
           passed,
           testName,
           testCode,

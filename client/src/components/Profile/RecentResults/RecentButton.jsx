@@ -16,14 +16,30 @@ const RecentButton = (props) => {
       }}
     >
       <div className="rb-left-container">
-        <Heading size="md" fontWeight="light">
+        <Heading
+          size="md"
+          fontWeight="light"
+          color={props.pass ? "teal" : "orangered"}
+        >
           {props.testName}
         </Heading>
-        <Heading size="sm" fontWeight="light">
+        <Heading
+          size="sm"
+          fontWeight="light"
+          color={props.pass ? "teal" : "orangered"}
+        >
           {props.date}
         </Heading>
       </div>
-      <div className="rb-right-container">{props.pass ? "Pass" : "Fail"}</div>
+      <div className="rb-right-container">
+        <Heading
+          size="md"
+          fontWeight="normal"
+          color={props.pass ? "teal" : "orangered"}
+        >
+          {props.pass ? "Pass" : "Fail"}
+        </Heading>
+      </div>
     </div>
   );
 };

@@ -41,7 +41,7 @@ const Profile = () => {
         </div>
         <div className="profile-right-container">
           <div className="profile-top-container">
-            <RecentResults results={results} />
+            {results && <RecentResults results={results} />}
           </div>
           <div className="profile-bottom-container">
             <div className="profile-heatmap-heading">

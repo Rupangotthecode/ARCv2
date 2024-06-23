@@ -12,6 +12,7 @@ const resultSchema = mongoose.Schema({
   testCode: { type: String, required: true },
   testLevel: { type: Number, required: true },
   score: { type: Number, required: true },
+  totalScore: { type: Number, required: true },
   passed: { type: Boolean, required: true },
   testDetails: [
     {

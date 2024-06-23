@@ -1,0 +1,87 @@
+.stats-main-container{
+    height: 100vh;
+    width: 100vw;
+    padding-top: 11vh;
+    background-color: aliceblue;
+}
+
+.stats-content-container{
+    height: 100%;
+    width: 100%;
+    padding-left: 3%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 2%;
+}
+
+.stats-left-container{
+    height: 100%;
+    padding: 1%;
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: white;
+    border-radius: 40px;
+    box-shadow: 0px 0px 3px 4px rgb(255, 255, 255), 0px 0px 6px 5px rgba(194, 136, 255, 0.766);
+    overflow-y: scroll;
+}
+
+.stats-radar-chart-container{
+    width: 100%; 
+    height: 100%;
+    padding-top: 1%;
+}
+
+.stats-right-container{
+    height: 100%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.stats-rt-container{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 3.5%;
+}
+
+.stats-piechart-container {
+    width: 48%;
+    height: 100%;
+    padding: 1%;
+    background-color: white;
+    border-radius: 40px;
+    box-shadow: 0px 0px 3px 4px rgb(255, 255, 255), 0px 0px 6px 5px rgba(169, 255, 99, 0.766);
+    overflow-y: scroll;
+}
+
+.stats-incentive-container{
+    width: 48%;
+    height: 100%;
+    background-color: white;
+    border-radius: 40px;
+    box-shadow: 0px 0px 3px 4px rgb(255, 255, 255), 0px 0px 6px 5px rgba(104, 139, 255, 0.766);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.stats-rb-container{
+    width: 100%;
+    height: 45%;
+    box-shadow: 0px 0px 3px 4px rgb(255, 255, 255), 0px 0px 6px 5px rgba(255, 111, 111, 0.766);
+    background-color: white;
+    border-radius: 40px;
+    padding: 1%;
+}
+

@@ -22,6 +22,8 @@ import Profile from "./pages/Profile/Profile";
 import { useDispatch } from "react-redux";
 import { logout } from "./actions/auth";
 import Settings from "./pages/Settings/Settings";
+import Statistics from "./pages/Statistics/Statistics";
+import Allresults from "./pages/Allresults/Allresults";
 
 const AllRoutes = () => {
   const location = useLocation();
@@ -39,7 +41,7 @@ const AllRoutes = () => {
         // Call your logout logic here
         // Assuming you're using Redux for state management
         dispatch(logout(navigate));
-      }, 5 * 60 * 1000); // 15 minutes in milliseconds
+      }, 50 * 60 * 1000); // 15 minutes in milliseconds
     };
 
     // Event listeners to track user activity
@@ -72,6 +74,8 @@ const AllRoutes = () => {
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Home" element={<Home />} />
         <Route path="/Settings" element={<Settings />} />
+        <Route path="/Statistics" element={<Statistics />} />
+        <Route path="/AllResults" element={<Allresults />} />
         <Route
           path="/TestA"
           element={

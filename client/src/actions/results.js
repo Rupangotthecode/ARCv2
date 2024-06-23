@@ -7,6 +7,7 @@ export const submitResults =
     loginID,
     name,
     score,
+    totalScore,
     passed,
     testName,
     testCode,
@@ -20,6 +21,7 @@ export const submitResults =
       loginID,
       name,
       score,
+      totalScore,
       passed,
       testName,
       testCode,
@@ -32,6 +34,7 @@ export const submitResults =
         loginID,
         name,
         score,
+        totalScore,
         passed,
         testName,
         testCode,
@@ -62,8 +65,20 @@ export const getResultWithId = (resId) => async (dispatch) => {
 
 export const getAllResults = (userId) => async (dispatch) => {
   try {
-    const { data } = await api.getAllResults(userId);
-    dispatch({ type: "GET_ALL_RESULTS", payload: data });
+    if (userId) {
+      const { data } = await api.getAllResults(userId);
+      dispatch({ type: "GET_ALL_RESULTS", payload: data });
+      console.log("in", data, userId);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const setResultsWithFilter = (results) => async (dispatch) => {
+  try {
+    dispatch({ type: "GET_FILTERED_RESULTS", payload: results });
+    console.log("in", results);
   } catch (error) {
     console.log(error);
   }

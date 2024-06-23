@@ -11,6 +11,7 @@ export const submitResults = async (req, res) => {
       loginID,
       name,
       score,
+      totalScore,
       passed,
       testName,
       testCode,
@@ -27,6 +28,7 @@ export const submitResults = async (req, res) => {
       testCode: testCode,
       testLevel: testLevel,
       score: score,
+      totalScore: totalScore,
       passed: passed,
       testDetails: testData,
     });

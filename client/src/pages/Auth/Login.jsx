@@ -12,6 +12,7 @@ import {
   InputRightElement,
   VStack,
   HStack,
+  useDisclosure,
 } from "@chakra-ui/react";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -21,12 +22,17 @@ import "./Login.css";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import { motion } from "framer-motion";
 import green_face_anim from "../../assets/auth/green_face_lottie.json";
+import { ErrorBoundary, useErrorBoundary } from "react-error-boundary";
+import ErrorModalGeneral from "../../components/ErrorControl/ErrorModalGeneral";
+import ErrorModalAuth from "../../components/ErrorControl/ErrorModalAuth";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
   const [show, setShow] = useState(false);
+  const [error, setError] = useState(null);
   const handleClickpass = () => setShow(!show);
   const handlesignup = () => {
     navigate("/Signup");
@@ -42,8 +48,14 @@ const Login = () => {
 
       password: Yup.string().required("Required"),
     }),
-    onSubmit: (values) => {
-      dispatch(login(values, navigate));
+    onSubmit: async (values) => {
+      try {
+        await dispatch(login(values, navigate));
+      } catch (error) {
+        console.log("error caught", error);
+        setError({ message: error.message, header: error.heading });
+        onOpen();
+      }
     },
   });
 
@@ -63,6 +75,12 @@ const Login = () => {
   return (
     <div className="auth-main-container">
       <div className="auth-central-container">
+        <ErrorModalAuth
+          isOpen={isOpen}
+          onClose={onClose}
+          errorBody={error?.message}
+          errorHeader={error?.header}
+        />
         <div className="auth-info-container">
           <VStack color="#490086" alignItems="center">
             <Heading size="2xl" pb="5%">

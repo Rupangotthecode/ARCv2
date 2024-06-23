@@ -1,6 +1,13 @@
 import * as api from "../api";
 import { setCurrentUser } from "./currentUser";
 
+class CustomError extends Error {
+  constructor(message, heading) {
+    super(message);
+    this.heading = heading;
+  }
+}
+
 const generatePassword = (dob, name) => {
   // Extract day, month, and year from DOB
   const [year, month, day] = dob.split("-");
@@ -24,21 +31,23 @@ export const signup = (authData) => async (dispatch) => {
     dispatch({ type: "AUTH", data });
     dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data.message);
+    throw new CustomError(error.response.data.message, "Signup unsuccessful!");
   }
 };
 
 export const login = (authData, navigate) => async (dispatch) => {
   try {
-    console.log("inside login", authData);
-    const { data } = await api.logIn(authData);
+    const { data, response } = await api.logIn(authData);
+    console.log("inside login", response);
     dispatch({ type: "AUTH", data });
     dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
     if (navigate) {
       navigate("/Home");
     }
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data.message);
+    throw new CustomError(error.response.data.message, "Login unsuccessful!");
   }
 };
 

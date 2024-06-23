@@ -21,15 +21,19 @@ import { useNavigate } from "react-router-dom";
 import "./Signup.css";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import { motion } from "framer-motion";
+import { useDisclosure } from "@chakra-ui/react";
 import SignupStatusbar from "../../components/Auth/SignupStatusbar";
 import black_cat_anim from "../../assets/auth/black_cat.json";
 import QuestionTab from "../../components/Auth/QuestionTab";
+import ErrorModalAuth from "../../components/ErrorControl/ErrorModalAuth";
 
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
   const [statusIndex, setStatusIndex] = useState(0);
+  const [error, setError] = useState(null);
   const handlesignup = () => {
     navigate("/");
   };
@@ -51,9 +55,15 @@ const Signup = () => {
 
       loginID: Yup.string().required("Please enter a suitable  username."),
     }),
-    onSubmit: (values) => {
-      dispatch(signup(values, navigate));
-      setStatusIndex(1);
+    onSubmit: async (values) => {
+      try {
+        await dispatch(signup(values, navigate));
+        setStatusIndex(1);
+      } catch (error) {
+        console.log("error caught", error);
+        setError({ message: error.message, header: error.heading });
+        onOpen();
+      }
     },
   });
 
@@ -78,6 +88,12 @@ const Signup = () => {
   return (
     <div className="signup-main-container">
       <div className="signup-central-container">
+        <ErrorModalAuth
+          isOpen={isOpen}
+          onClose={onClose}
+          errorBody={error?.message}
+          errorHeader={error?.header}
+        />
         <div className="signup-top-container">
           <SignupStatusbar steps={steps} index={statusIndex} />
         </div>
