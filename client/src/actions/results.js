@@ -68,6 +68,7 @@ export const getAllResults = (userId) => async (dispatch) => {
     if (userId) {
       const { data } = await api.getAllResults(userId);
       dispatch({ type: "GET_ALL_RESULTS", payload: data });
+      dispatch({ type: "GET_FILTERED_RESULTS", payload: data.reverse() });
       console.log("in", data, userId);
     }
   } catch (error) {

@@ -15,11 +15,14 @@ const Allresults = () => {
     dispatch(getAllResults(userId));
   }, [userId, dispatch]);
   const userResults = useSelector((state) => state.allResultsReducer)?.data;
+  const filteredResults = useSelector(
+    (state) => state.filteredResultsReducer
+  )?.data;
 
   return (
     <div className="ar-main-container">
       <Navbar heading="teal" button="teal" />
-      {userResults && (
+      {filteredResults && userResults && (
         <div className="ar-content-container">
           <div className="ar-list-container">
             <div className="ar-list-heading-container">
@@ -33,10 +36,13 @@ const Allresults = () => {
               />
             </div>
             <div className="ar-list-content-container">
-              {userResults.map((result) => (
+              {filteredResults.map((result, index) => (
                 <RecentButton
+                  key={index}
                   pass={result.passed}
                   testName={result.testName}
+                  score={result.score}
+                  totalScore={result.totalScore}
                   resultPath={`/result/${result._id}`}
                   date={result.date}
                 />

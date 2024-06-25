@@ -5,6 +5,7 @@ import "./RecentResults.css";
 
 const RecentButton = (props) => {
   const navigate = useNavigate();
+  const testPercentage = (props.score / props.totalScore) * 100;
   return (
     <div
       className="rb-main-container"
@@ -38,6 +39,7 @@ const RecentButton = (props) => {
           color={props.pass ? "teal" : "orangered"}
         >
           {props.pass ? "Pass" : "Fail"}
+          {` (${testPercentage.toFixed(2)}%)`}{" "}
         </Heading>
       </div>
     </div>
