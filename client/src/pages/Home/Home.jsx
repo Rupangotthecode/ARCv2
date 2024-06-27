@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import aud_awar from "../../assets/home/aud_awar.json";
 import aud_disc from "../../assets/home/aud_disc.json";
 import results from "../../assets/home/results.json";
@@ -17,7 +17,7 @@ const Home = () => {
     { gif: results, text: "சோதனை பகுப்பாய்வு", link: "/Statistics" },
     { gif: settings, text: "அமைப்புகள்", link: "/Settings" },
   ];
-  const [admin, setAdmin] = useState(true);
+  const admin = true;
 
   return (
     <div className="home-main-container">

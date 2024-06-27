@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Heading, Flex } from "@chakra-ui/react";
+import { Heading, Flex } from "@chakra-ui/react";
 import { calculateAge } from "../../../utils/ProfileUtils";
 import "./ProfileDetails.css";
 

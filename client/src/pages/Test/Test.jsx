@@ -4,8 +4,8 @@ import TestA from "../../components/Test/TestA/TestA";
 import "./Test.css";
 import { Button, Heading } from "@chakra-ui/react";
 import Rules from "../../components/Test/Rules/Rules";
-import { testARules } from "../../const";
-import { levelADataES, levelADataMU } from "../../const";
+import { testARules, testBRules } from "../../const";
+import { levelADataES } from "../../const";
 import axios from "axios";
 import TestB from "../../components/Test/TestB/TestB";
 
@@ -60,7 +60,7 @@ const Test = (props) => {
 
   return (
     <div className="test-main-container">
-      {showRules && (
+      {showRules && testType === "A" && (
         <Rules
           heading="செவிவழி விழிப்புணர்வு"
           subheading={
@@ -72,6 +72,22 @@ const Test = (props) => {
           }
           content={testARules}
           closeRules={toggleRules}
+          color="teal"
+        />
+      )}
+      {showRules && testType === "B" && (
+        <Rules
+          heading="செவிவழி வேறுபாடு"
+          subheading={
+            content === "diffsounds"
+              ? "ஒலிகலின் வேறுபாட்டை அறிக"
+              : content === "communication"
+              ? "சொல்லின் தொடர்பு நோக்கத்தின் வேறுபாடு"
+              : "தமிழ் சத்தங்களை அறிக"
+          }
+          content={testBRules}
+          closeRules={toggleRules}
+          color="rgb(155, 129, 191)"
         />
       )}
       <div className="test-heading-container">

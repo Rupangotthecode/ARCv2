@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Profile.css";
 import avatar from "../../assets/avatars/avatar3.png";
-import { Button, Heading, Image } from "@chakra-ui/react";
+import { Heading, Image } from "@chakra-ui/react";
 import ProfileDetails from "../../components/Profile/ProfileDetails/ProfileDetails";
 import RecentResults from "../../components/Profile/RecentResults/RecentResults";
 import { useDispatch, useSelector } from "react-redux";

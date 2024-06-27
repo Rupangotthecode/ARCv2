@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./SearchTool.css";
 import {
   filterResults,
@@ -17,7 +17,6 @@ import {
   RangeSliderThumb,
   RangeSliderMark,
   Box,
-  Input,
 } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { setResultsWithFilter } from "../../actions/results";
@@ -68,7 +67,7 @@ const SearchTool = (props) => {
                 ))}
               </Stack>
             </CheckboxGroup>
-            <Heading color="teal" size="md" fontWeight="600">
+            <Heading color="teal" size="md" fontWeight="600" pt="4%">
               மதிப்பெண் % மூலம் வடிகட்டவும்
             </Heading>
             <Divider borderColor="teal" borderWidth="1px" borderRadius="40px" />

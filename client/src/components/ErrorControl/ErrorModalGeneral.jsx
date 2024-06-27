@@ -12,7 +12,7 @@ import {
 
 const ErrorModal = (props) => {
   const cancelRef = React.useRef();
-  const { isOpen, onClose } = useDisclosure();
+  const { onClose } = useDisclosure();
 
   return (
     <AlertDialog

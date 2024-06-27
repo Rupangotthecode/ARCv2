@@ -389,6 +389,7 @@ export const streamAudio = (
       "http://localhost:5000/audio/get/" + encodedAudLink2;
     setAud2((prevState) => {
       const audio = new Audio(completeAudLink2);
+      audio.volume = volume / 100;
       audio.onerror = () => {
         console.error("Audio load error");
       };

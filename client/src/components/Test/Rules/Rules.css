@@ -12,14 +12,12 @@
     align-items: center;
     padding: 2%;
     gap: 2%;
-    color: teal;
     z-index: 1;
 }
 
 .rules-heading-container{
     width: 100%;
     height: auto;
-    border-bottom: 2px solid teal;
     padding-bottom: 1%;
 }
 

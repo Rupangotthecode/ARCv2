@@ -15,11 +15,16 @@ const Rules = (props) => {
         ease: "easeInOut",
         duration: 0.8,
       }}
+      style={{ color: props.color }}
     >
-      <div className="rules-heading-container">
+      <div
+        className="rules-heading-container"
+        style={{ borderBottom: "2px solid " + props.color }}
+      >
         <Heading size="2xl">{props.heading}</Heading>
         <Heading size="xl">{props.subheading}</Heading>
       </div>
+
       <div className="rules-content-container">
         <>
           <Heading size="lg" fontWeight="400" textAlign="left" flexWrap="wrap">
@@ -36,7 +41,7 @@ const Rules = (props) => {
         <div className="rules-button-container">
           <Button
             variant="solid"
-            colorScheme="teal"
+            colorScheme={props.color === "teal" ? "teal" : "purple"}
             onClick={() => props.closeRules()}
           >
             மூடவும் மற்றும் தொடங்கவும்

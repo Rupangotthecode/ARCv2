@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Result.css";
-import { Button, Heading } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import {
   BarChart,
@@ -16,7 +16,7 @@ import {
 } from "recharts";
 import pass from "../../assets/result/pass.json";
 import fail from "../../assets/result/fail.json";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getResultWithId } from "../../actions/results";
 
@@ -25,7 +25,6 @@ const Result = (props) => {
   const resultId = useParams().resId;
   console.log(resultId);
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   console.log(resultData);

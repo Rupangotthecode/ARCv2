@@ -14,12 +14,16 @@ const RecentResults = (props) => {
             <RecentButton
               pass={lastTwo[0].passed}
               testName={lastTwo[0].testName}
+              score={lastTwo[0].score}
+              totalScore={lastTwo[0].totalScore}
               resultPath={`/result/${lastTwo[0]._id}`}
               date={lastTwo[0].date}
             />
             {lastTwo?.length > 1 && (
               <RecentButton
                 pass={lastTwo[1].passed}
+                score={lastTwo[1].score}
+                totalScore={lastTwo[1].totalScore}
                 testName={lastTwo[1].testName}
                 resultPath={`/result/${lastTwo[1]._id}`}
                 date={lastTwo[1].date}
