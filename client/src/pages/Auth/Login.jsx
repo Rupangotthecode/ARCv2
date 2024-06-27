@@ -22,8 +22,6 @@ import "./Login.css";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import { motion } from "framer-motion";
 import green_face_anim from "../../assets/auth/green_face_lottie.json";
-import { ErrorBoundary, useErrorBoundary } from "react-error-boundary";
-import ErrorModalGeneral from "../../components/ErrorControl/ErrorModalGeneral";
 import ErrorModalAuth from "../../components/ErrorControl/ErrorModalAuth";
 
 const Login = () => {

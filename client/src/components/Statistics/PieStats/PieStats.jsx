@@ -10,7 +10,6 @@ const PieStats = (props) => {
   const levelPieData = createTestLevelData(props.results);
   const testPieData = createTestPieData(props.results);
 
-  console.log(levelPieData, testPieData);
   return (
     <div className="pc-main-container">
       <ResponsiveContainer>

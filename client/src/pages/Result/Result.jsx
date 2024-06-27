@@ -20,14 +20,11 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getResultWithId } from "../../actions/results";
 
-const Result = (props) => {
+const Result = () => {
   const resultData = useSelector((state) => state.resultsReducer)?.data;
   const resultId = useParams().resId;
-  console.log(resultId);
 
   const dispatch = useDispatch();
-
-  console.log(resultData);
 
   useEffect(() => {
     dispatch(getResultWithId(resultId));

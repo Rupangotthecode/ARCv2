@@ -1,6 +1,5 @@
 export const manageUnlocks = (user, testCode, testLevel) => {
   const currentUnlock = user.unlocks[testCode];
-  console.log(currentUnlock);
   if (currentUnlock === 4) {
     if (testCode.includes("A")) {
       switch (testCode) {

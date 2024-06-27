@@ -11,7 +11,7 @@ export const createRadarChartData = (results) => {
     let testCode = result.testCode;
     let testPercentage = (result.score / result.totalScore) * 100;
     let testFound = checkTestPresence(testName, radarData);
-    console.log(testFound, result.score);
+
     if (testFound === -1) {
       radarData.push({
         testName: testName,
@@ -28,7 +28,6 @@ export const createRadarChartData = (results) => {
       radarData[testIndex] = testFound;
     }
   });
-  console.log(radarData);
   return radarData;
 };
 
@@ -79,7 +78,7 @@ export const createLineChartData = (results) => {
     let percentageScore = (result.score / result.totalScore) * 100;
     percentageScore = percentageScore.toFixed(2);
     let testCode = result.testCode;
-    console.log(result, date, percentageScore, testCode);
+
     lineData.push({
       date: date,
       percentageScore: percentageScore,

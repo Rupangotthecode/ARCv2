@@ -15,7 +15,6 @@ import "./LineStats.css";
 
 const LineStats = (props) => {
   let lineData = createLineChartData(props.results);
-  console.log(lineData);
   const COLORS = { pass: "#82ca9d", fail: "red" };
   return (
     <div className="ls-main-container">

@@ -7,6 +7,7 @@ import BackButton from "./Backbutton";
 import ReloadButton from "./Reloadbutton";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../actions/auth";
+import HomeButton from "./HomeButton";
 
 const Navbar = (props) => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const Navbar = (props) => {
         <div className="navbar-util-buttons">
           <BackButton color={props.button} />
           <ReloadButton color={props.button} />
+          <HomeButton color={props.button} />
         </div>
         <Heading size="xl" color={props.heading}>
           செவித்திறன்{" "}

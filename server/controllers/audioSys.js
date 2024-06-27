@@ -4,12 +4,9 @@ import path from "path";
 
 export const getAudioFile = (req, res) => {
   try {
-    console.log("hello");
-    console.log(req.params);
     const encodedFilename = req.params.filename;
     const filename = decodeURIComponent(encodedFilename);
     const filePath = filename;
-    console.log(filePath);
 
     // Check if the file exists
     if (fs.existsSync(filePath)) {
@@ -39,7 +36,7 @@ export const getAudioFile = (req, res) => {
       return; // Add this return statement to prevent further execution
     } else {
       // If the file doesn't exist, send a 404 response
-      console.log("fnf");
+
       res.status(404).json("File not found");
       return; // Add this return statement to prevent further execution
     }

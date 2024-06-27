@@ -11,12 +11,6 @@ export const submitResultA = (
   resArray,
   navigate
 ) => {
-  console.log(
-    "inside UE condition",
-    User.result._id,
-    User.result.loginID,
-    User.result.name
-  );
   let passed = false;
   let testName = "";
   let testCode = "";
@@ -64,12 +58,6 @@ export const submitResultB = (
   resArray,
   navigate
 ) => {
-  console.log(
-    "inside UE condition",
-    User.result._id,
-    User.result.loginID,
-    User.result.name
-  );
   let passed = false;
   let testName = "";
   let testCode = "";
@@ -119,7 +107,6 @@ export const handleSubmit = (
 ) => {
   if (User?.result?._id) {
     flushSync(() => {
-      console.log("resArray in submit");
       setResArray((prevState) => [...prevState, questionStatus]);
     });
     flushSync(() => {
@@ -143,7 +130,6 @@ export const playpause = (
     const playState1 = variable1.isPlaying;
     const playState2 = variable2.isPlaying;
     if (playState1 && variable1?.audio?.readyState >= 2) {
-      console.log("Pausing Audio");
       try {
         variable1.audio?.pause();
         setVariable1((prevState) => ({ ...prevState, isPlaying: false }));
@@ -151,7 +137,6 @@ export const playpause = (
         console.log("Error while pausing audio:", error);
       }
     } else if (playState2 && variable2?.audio?.readyState >= 2) {
-      console.log("Pausing Audio");
       try {
         variable2.audio?.pause();
         setVariable2((prevState) => ({ ...prevState, isPlaying: false }));
@@ -160,7 +145,6 @@ export const playpause = (
         console.log("Error while pausing audio:", error);
       }
     } else if (audTracker === 1) {
-      console.log("Playing Audio:", variable1?.audio);
       try {
         variable1.audio?.play();
         setVariable1((prevState) => ({ ...prevState, isPlaying: true }));
@@ -170,7 +154,6 @@ export const playpause = (
             variable2.audio?.play();
             setVariable2((prevState) => ({ ...prevState, isPlaying: true }));
             variable2.audio?.addEventListener("ended", () => {
-              console.log("hello");
               setAudTracker(1);
               setVariable1((prevState) => ({ ...prevState, isPlaying: false }));
               setVariable2((prevState) => ({ ...prevState, isPlaying: false }));
@@ -193,7 +176,6 @@ export const playpause = (
         variable2.audio?.play();
         setVariable2((prevState) => ({ ...prevState, isPlaying: true }));
         variable2.audio?.addEventListener("ended", () => {
-          console.log("hello");
           setAudTracker(1);
           setVariable1((prevState) => ({ ...prevState, isPlaying: false }));
           setVariable2((prevState) => ({ ...prevState, isPlaying: false }));
@@ -208,7 +190,6 @@ export const playpause = (
   } else {
     const playState1 = variable1.isPlaying;
     if (playState1 && variable1?.audio?.readyState >= 2) {
-      console.log("Pausing Audio");
       try {
         variable1.audio?.pause();
         setVariable1((prevState) => ({ ...prevState, isPlaying: false }));
@@ -282,7 +263,6 @@ export const handleAnswer = (
         ...prevState,
         t3: true,
       }));
-      console.log(questionStatus);
     }
     resultToast({
       title: "Correct, +1 point",
@@ -296,13 +276,10 @@ export const handleAnswer = (
       isClosable: true,
     });
   }
-  console.log("ResArray", resArray);
+
   if (tno === 3) {
-    console.log("Hello There!", testData?.length - 1, qno);
     if (qno === testData?.length - 1) {
-      console.log("Hello There!Im in", testData?.length - 1, qno);
       flushSync(() => {
-        console.log("Hello There!Im in deep", testData?.length - 1, qno);
         handleSubmit(
           User,
           setResArray,
@@ -347,7 +324,6 @@ export const updateResArray = (
   setQuestionStatus
 ) => {
   setResArray((prevState) => [...prevState, questionStatusRef.current]);
-  console.log("resArray updated", testData?.[qno]["name"]);
   setQuestionStatus((prevQuestionStatus) => ({
     ...prevQuestionStatus,
     question1: testData?.[qno]["name"],
@@ -439,7 +415,6 @@ export const streamAudio = (
 export const randomizeAnswer = (setCorrectAns, amal = false) => {
   if (!amal) {
     const randomNum = Math.floor(Math.random() * 1000);
-    console.log(randomNum);
     if (randomNum % 2 === 0) {
       setCorrectAns(1);
     } else {
@@ -456,7 +431,6 @@ export const randomizeAnswer = (setCorrectAns, amal = false) => {
     } else {
       randomNum = 3; // Set randomNum to 3 with probability 1/3
     }
-    console.log("amal mode", randomNum);
     if (randomNum === 1) {
       setCorrectAns(1);
     } else if (randomNum === 2) {

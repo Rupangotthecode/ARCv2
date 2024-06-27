@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import "./TestLevelMenu.css";
 
 const TLMitem = ({ User, item, parameter }) => {
-  console.log(User);
   const navigate = useNavigate();
   const toast = useToast();
   const handleClick = () => {

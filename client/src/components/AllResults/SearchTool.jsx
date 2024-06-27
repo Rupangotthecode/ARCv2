@@ -31,7 +31,6 @@ const SearchTool = (props) => {
     testScore: [0, 100],
   });
   const handleFilter = (e, name) => {
-    console.log(e);
     setSelectedFilter((prev) => ({ ...prev, [name]: e }));
   };
   const handleSubmit = (e) => {
@@ -39,7 +38,6 @@ const SearchTool = (props) => {
     const filteredResults = filterResults(props.results, selectedFilter);
     dispatch(setResultsWithFilter(filteredResults));
   };
-  console.log(testNames);
   return (
     <div className="srt-main-container">
       <div className="srt-header-container">

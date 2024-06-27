@@ -26,34 +26,31 @@ export const signup = (authData) => async (dispatch) => {
       ...authData,
       password: generatePassword(authData.dob, authData.name),
     };
-    console.log(new_authData);
+
     const { data } = await api.signUp(new_authData);
     dispatch({ type: "AUTH", data });
     dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
   } catch (error) {
-    console.log(error.response.data.message);
     throw new CustomError(error.response.data.message, "Signup unsuccessful!");
   }
 };
 
 export const login = (authData, navigate) => async (dispatch) => {
   try {
-    const { data, response } = await api.logIn(authData);
-    console.log("inside login", response);
+    const { data } = await api.logIn(authData);
+
     dispatch({ type: "AUTH", data });
     dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
     if (navigate) {
       navigate("/Home");
     }
   } catch (error) {
-    console.log(error.response.data.message);
     throw new CustomError(error.response.data.message, "Login unsuccessful!");
   }
 };
 
 export const logout = (navigate) => async (dispatch) => {
   try {
-    console.log("inside logout");
     localStorage.removeItem("Profile");
     dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
     if (navigate) {
@@ -70,12 +67,13 @@ export const persistLogin = () => async (dispatch) => {
     // console.log(authData);
     // dispatch(login(authData));
     dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const postParentQues = (id, quesArray, navigate) => async (dispatch) => {
   try {
-    console.log({ id, quesArray });
     const { data } = await api.postParentQues({ id, quesArray });
     dispatch({ type: "AUTH", data });
     dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));

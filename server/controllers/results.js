@@ -32,18 +32,13 @@ export const submitResults = async (req, res) => {
       passed: passed,
       testDetails: testData,
     });
-    console.log(id, loginID, name);
     await new_result.save();
-    console.log(passed);
     let user = await Users.findById(id);
     if (passed) {
-      console.log("passed", user.unlocks[testCode]);
       user = manageUnlocks(user, testCode, testLevel);
     }
     user.results.push(new_result._id);
-    console.log(user);
     await Users.findByIdAndUpdate(id, user);
-    console.log("done");
     res.status(200).json({
       message: "Result Submitted Successfully",
       resId: new_result._id,

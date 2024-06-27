@@ -12,7 +12,6 @@ import {
 } from "@chakra-ui/react";
 
 const SignupStatusbar = (props) => {
-  console.log(props.index);
   return (
     <Stepper
       size="lg"

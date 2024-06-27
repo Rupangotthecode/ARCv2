@@ -8,7 +8,6 @@ export const retrieveNamesFromResults = (results) => {
 };
 
 export const filterResults = (results, filterObj) => {
-  console.log(filterObj, results);
   let filteredResults = [];
   if (filterObj.testName?.length > 0) {
     filterObj.testName.forEach((filterName) => {
@@ -19,7 +18,6 @@ export const filterResults = (results, filterObj) => {
         filteredResults.push(result);
       });
     });
-    console.log("Filteerd:", filteredResults);
   }
   if (filterObj.testScore?.length > 0) {
     if (filteredResults.length > 0) {

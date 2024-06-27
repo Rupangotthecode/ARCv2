@@ -81,10 +81,10 @@ const TestA = (props) => {
     const encodedImgLink = encodeURIComponent(imgLink);
     const completeImgLink = "http://localhost:5000/image/get/" + encodedImgLink;
     setImg(completeImgLink);
-    console.log(testData);
+
     if (testData?.[qno]["name"] && questionStatusRef.current) {
       setResArray((prevState) => [...prevState, questionStatusRef.current]);
-      console.log("resArray updated", testData?.[qno]["name"]);
+
       setQuestionStatus((prevQuestionStatus) => ({
         ...prevQuestionStatus,
         question1: testData?.[qno]["name"],
@@ -113,12 +113,10 @@ const TestA = (props) => {
           t2: true,
         }));
       } else {
-        console.log("Here");
         setQuestionStatus((prevState) => ({
           ...prevState,
           t3: true,
         }));
-        console.log(questionStatus);
       }
       resultToast({
         title: "Correct, +1 point",
@@ -132,7 +130,7 @@ const TestA = (props) => {
         isClosable: true,
       });
     }
-    console.log("ResArray", resArray);
+
     if (tno === 3) {
       if (qno === testData?.length - 1) {
         flushSync(() => {
@@ -162,7 +160,6 @@ const TestA = (props) => {
     setVariable((prevState) => {
       const playState = prevState.isPlaying;
       if (playState && variable?.audio?.readyState >= 2) {
-        console.log("pausing");
         try {
           variable.audio?.pause();
         } catch (error) {
@@ -195,7 +192,6 @@ const TestA = (props) => {
   const handleSubmit = () => {
     if (User?.result?._id) {
       flushSync(() => {
-        console.log("resArray in submit");
         setResArray((prevState) => [...prevState, questionStatus]);
       });
       flushSync(() => {
@@ -209,9 +205,8 @@ const TestA = (props) => {
 
   useEffect(() => {
     const audioElement = aud.audio;
-    console.log("in");
+
     const handleEnded = () => {
-      console.log("Before", aud);
       setAud((prevState) => ({
         ...prevState,
         isPlaying: false,
@@ -227,7 +222,7 @@ const TestA = (props) => {
 
   useEffect(() => {
     const randomNum = Math.floor(Math.random() * 1000);
-    console.log(randomNum);
+
     if (randomNum % 2 === 0) {
       setCorrectAns(1);
     } else {
@@ -239,12 +234,6 @@ const TestA = (props) => {
     // This effect will be triggered whenever resArray is updated.
 
     if (submit && User?.result?._id && !isSubmitted) {
-      console.log(
-        "inside UE condition",
-        User.result._id,
-        User.result.loginID,
-        User.result.name
-      );
       let passed = false;
       let testName = "";
       let testCode = "";

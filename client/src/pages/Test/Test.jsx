@@ -48,7 +48,6 @@ const Test = (props) => {
       .then((response) => {
         setJsonData(response.data);
       })
-      .then(console.log("hi"))
       .catch((error) => {
         console.log("Error fetching data:", error);
       });
