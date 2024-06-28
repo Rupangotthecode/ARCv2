@@ -33,6 +33,7 @@ const TestA = (props) => {
   const [testData, setTestData] = useState();
 
   useEffect(() => {
+    console.log("in", props?.jsonData);
     setTestData(props?.jsonData?.[props?.level - 1]);
   }, [props.jsonData, props.level]);
 
@@ -290,6 +291,8 @@ const TestA = (props) => {
     isSubmitted,
   ]);
 
+  console.log(testData);
+
   return (
     <>
       {props.jsonData && (
@@ -365,113 +368,115 @@ const TestA = (props) => {
               </div>
             </div>
           </div>
-          <div className="testa-data-container">
-            <div className="testa-databox levelname">
-              <Heading size="lg" color="teal">
-                ஒலி: {testData?.[qno]["name"]}
-              </Heading>
-            </div>
-            <div className="testa-databox trial">
-              <Heading size="lg" color="teal">
-                சோதனை {tno}/3
-              </Heading>
-            </div>
-            <div className="testa-databox question-number">
-              <Heading size="lg" color="teal">
-                கேள்வி எண்: {qno}/{testData?.length - 1}
-              </Heading>
-            </div>
-            <div className="testa-databox point">
-              <Heading size="lg" color="teal">
-                மொத்த மதிப்பெண்: {points}/{(testData?.length - 1) * 3}
-              </Heading>
-            </div>
-            <div className="testa-databox exit-buttons">
-              <div
-                className="testa-exitbtn exitbtn-red"
-                onClick={() => openModalsubmit()}
-              >
-                <Heading color="rgb(244, 254, 255)" size="lg">
-                  சமர்ப்பிக்கவும்
+          {testData?.[qno]["name"] && (
+            <div className="testa-data-container">
+              <div className="testa-databox levelname">
+                <Heading size="lg" color="teal">
+                  ஒலி: {testData?.[qno]["name"]}
                 </Heading>
               </div>
-              <div
-                className="testa-exitbtn"
-                onClick={() => openModalexit()}
-                style={{ backgroundColor: "orangered" }}
-              >
-                <Heading color="rgb(244, 254, 255)" size="lg">
-                  வெளியேறு
+              <div className="testa-databox trial">
+                <Heading size="lg" color="teal">
+                  சோதனை {tno}/3
                 </Heading>
               </div>
-              <Modal
-                isOpen={isModalsubmitOpen}
-                onClose={closeModalsubmit}
-                isCentered
-                height="300px"
-                width="300px"
-              >
-                <ModalOverlay />
-                <ModalContent>
-                  <ModalHeader>சோதனை சமர்ப்பிக்க?</ModalHeader>
-                  <ModalCloseButton />
-                  <ModalBody>
-                    சோதனையைச் சமர்ப்பிக்க விரும்புகிறீர்களா?
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button
-                      colorScheme="teal"
-                      mr={3}
-                      variant="ghost"
-                      onClick={closeModalsubmit}
-                    >
-                      மூடவும் தொடரவும்
-                    </Button>
-                    <Button
-                      colorScheme="teal"
-                      mr={3}
-                      onClick={() => handleSubmit()}
-                    >
-                      ஆம், சமர்ப்பிக்கவும்
-                    </Button>
-                  </ModalFooter>
-                </ModalContent>
-              </Modal>
-              <Modal
-                isOpen={isModalexitOpen}
-                onClose={closeModalexit}
-                isCentered
-                height="300px"
-                width="300px"
-              >
-                <ModalOverlay />
-                <ModalContent>
-                  <ModalHeader>வெளியேறும் சோதனை?</ModalHeader>
-                  <ModalCloseButton />
-                  <ModalBody>
-                    தேர்வில் இருந்து வெளியேற விரும்புகிறீர்களா?
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button
-                      colorScheme="teal"
-                      mr={3}
-                      variant="ghost"
-                      onClick={closeModalexit}
-                    >
-                      மூடவும் தொடரவும்
-                    </Button>
-                    <Button
-                      colorScheme="teal"
-                      mr={3}
-                      onClick={() => navigate("/Home")}
-                    >
-                      ஆம், வெளியேறு
-                    </Button>
-                  </ModalFooter>
-                </ModalContent>
-              </Modal>
+              <div className="testa-databox question-number">
+                <Heading size="lg" color="teal">
+                  கேள்வி எண்: {qno}/{testData?.length - 1}
+                </Heading>
+              </div>
+              <div className="testa-databox point">
+                <Heading size="lg" color="teal">
+                  மொத்த மதிப்பெண்: {points}/{(testData?.length - 1) * 3}
+                </Heading>
+              </div>
+              <div className="testa-databox exit-buttons">
+                <div
+                  className="testa-exitbtn exitbtn-red"
+                  onClick={() => openModalsubmit()}
+                >
+                  <Heading color="rgb(244, 254, 255)" size="lg">
+                    சமர்ப்பிக்கவும்
+                  </Heading>
+                </div>
+                <div
+                  className="testa-exitbtn"
+                  onClick={() => openModalexit()}
+                  style={{ backgroundColor: "orangered" }}
+                >
+                  <Heading color="rgb(244, 254, 255)" size="lg">
+                    வெளியேறு
+                  </Heading>
+                </div>
+                <Modal
+                  isOpen={isModalsubmitOpen}
+                  onClose={closeModalsubmit}
+                  isCentered
+                  height="300px"
+                  width="300px"
+                >
+                  <ModalOverlay />
+                  <ModalContent>
+                    <ModalHeader>சோதனை சமர்ப்பிக்க?</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                      சோதனையைச் சமர்ப்பிக்க விரும்புகிறீர்களா?
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button
+                        colorScheme="teal"
+                        mr={3}
+                        variant="ghost"
+                        onClick={closeModalsubmit}
+                      >
+                        மூடவும் தொடரவும்
+                      </Button>
+                      <Button
+                        colorScheme="teal"
+                        mr={3}
+                        onClick={() => handleSubmit()}
+                      >
+                        ஆம், சமர்ப்பிக்கவும்
+                      </Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
+                <Modal
+                  isOpen={isModalexitOpen}
+                  onClose={closeModalexit}
+                  isCentered
+                  height="300px"
+                  width="300px"
+                >
+                  <ModalOverlay />
+                  <ModalContent>
+                    <ModalHeader>வெளியேறும் சோதனை?</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                      தேர்வில் இருந்து வெளியேற விரும்புகிறீர்களா?
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button
+                        colorScheme="teal"
+                        mr={3}
+                        variant="ghost"
+                        onClick={closeModalexit}
+                      >
+                        மூடவும் தொடரவும்
+                      </Button>
+                      <Button
+                        colorScheme="teal"
+                        mr={3}
+                        onClick={() => navigate("/Home")}
+                      >
+                        ஆம், வெளியேறு
+                      </Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </>

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const HomeButton = (props) => {
   const navigate = useNavigate();
   const handleHome = () => {
-    navigate("/");
+    navigate("/Home");
   };
 
   return (

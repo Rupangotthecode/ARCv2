@@ -50,3 +50,6 @@ export const getResultWithId = (resId) =>
 
 export const getAllResults = (userId) =>
   API.get(`/results/getAllresults/${userId}`);
+
+export const getDBJson = (testType, content) =>
+  API.get(`/dbJson/get/${testType}/${content}`);

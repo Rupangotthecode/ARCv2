@@ -6,8 +6,9 @@ import { Button, Heading } from "@chakra-ui/react";
 import Rules from "../../components/Test/Rules/Rules";
 import { testARules, testBRules } from "../../const";
 import { levelADataES } from "../../const";
-import axios from "axios";
 import TestB from "../../components/Test/TestB/TestB";
+import { useDispatch, useSelector } from "react-redux";
+import { getDBJson } from "../../actions/dbJson";
 
 const Test = (props) => {
   const location = useLocation();
@@ -41,17 +42,12 @@ const Test = (props) => {
     amal = true;
   }
 
-  const [jsonData, setJsonData] = useState(null);
+  const dispatch = useDispatch();
   useEffect(() => {
-    axios
-      .get(`/db_json/${testType}_${content}.json`)
-      .then((response) => {
-        setJsonData(response.data);
-      })
-      .catch((error) => {
-        console.log("Error fetching data:", error);
-      });
-  }, [content, testType]);
+    dispatch(getDBJson(testType, content));
+  }, [testType, content, dispatch]);
+
+  const jsonData = useSelector((state) => state.dbJsonReducer)?.data;
 
   const toggleRules = () => {
     setShowRules((prevState) => !prevState);

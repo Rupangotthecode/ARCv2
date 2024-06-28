@@ -1,0 +1,167 @@
+[
+    [
+        {
+            "level": 1,
+            "instructions": "data/B_diffSounds/Level1/ins.wav",
+            "name": "data/B_diffSounds/Level1/name.wav"
+        },
+        {
+            "name": "உரத்த மற்றும் மென்மையான ஒலி",
+            "level": 1,
+            "name_audio": "data/B_diffSounds/Level1/a_name.wav",
+            "audio1": "data/B_diffSounds/Level1/a_1.wav",
+            "audio2": "data/B_diffSounds/Level1/a_2.wav",
+            "id": "I.B.1.a"
+        },
+        {
+            "name": "தொடர்ச்சியான மற்றும் திடீர் ஒலி",
+            "level": 1,
+            "name_audio": "data/B_diffSounds/Level1/b_name.wav",
+            "audio1": "data/B_diffSounds/Level1/b_1.wav",
+            "audio2": "data/B_diffSounds/Level1/b_2.wav",
+            "id": "I.B.1.b"
+        },
+        {
+            "name": "உயர் மற்றும் குறைந்த சுருதி ஒலி",
+            "level": 1,
+            "name_audio": "data/B_diffSounds/Level1/c_name.wav",
+            "audio1": "data/B_diffSounds/Level1/c_1.wav",
+            "audio2": "data/B_diffSounds/Level1/c_2.wav",
+            "id": "I.B.1.c"
+        },
+        {
+            "name": "அர்த்தமுள்ள சுற்றுச்சூழல் ஒலிகள்",
+            "level": 1,
+            "name_audio": "data/B_diffSounds/Level1/d_name.wav",
+            "audio1": "data/B_diffSounds/Level1/d_1.wav",
+            "audio2": "data/B_diffSounds/Level1/d_2.wav",
+            "id": "I.B.1.d"
+        },
+        {
+            "name": "ஆண் மற்றும் பெண் குரல்",
+            "level": 1,
+            "name_audio": "data/B_diffSounds/Level1/e_name.wav",
+            "audio1": "data/B_diffSounds/Level1/e_1.wav",
+            "audio2": "data/B_diffSounds/Level1/e_2.wav",
+            "id": "I.B.1.e"
+        },
+        {
+            "name": "சிறுவன் மற்றும் சிறுமி குரல்",
+            "level": 1,
+            "name_audio": "data/B_diffSounds/Level1/f_name.wav",
+            "audio1": "data/B_diffSounds/Level1/f_1.wav",
+            "audio2": "data/B_diffSounds/Level1/f_2.wav",
+            "id": "I.B.1.f"
+        }
+    ],
+    [
+        {
+            "level": 2,
+            "instructions": "data/B_diffSounds/Level2/ins.wav",
+            "name": "data/B_diffSounds/Level2/name.wav"
+        },
+        {
+            "name": "உரத்த மற்றும் மென்மையான ஒலி",
+            "level": 2,
+            "name_audio": "data/B_diffSounds/Level2/a_name.wav",
+            "audio1": "data/B_diffSounds/Level2/a_1.wav",
+            "audio2": "data/B_diffSounds/Level2/a_2.wav",
+            "id": "II.B.1.a"
+        },
+        {
+            "name": "தொடர்ச்சியான மற்றும் திடீர் ஒலி",
+            "level": 2,
+            "name_audio": "data/B_diffSounds/Level2/b_name.wav",
+            "audio1": "data/B_diffSounds/Level2/b_1.wav",
+            "audio2": "data/B_diffSounds/Level2/b_2.wav",
+            "id": "II.B.1.b"
+        },
+        {
+            "name": "உயர் மற்றும் குறைந்த சுருதி ஒலி",
+            "level": 2,
+            "name_audio": "data/B_diffSounds/Level2/c_name.wav",
+            "audio1": "data/B_diffSounds/Level2/c_1.wav",
+            "audio2": "data/B_diffSounds/Level2/c_2.wav",
+            "id": "II.B.1.c"
+        },
+        {
+            "name": "அர்த்தமுள்ள சுற்றுச்சூழல் ஒலிகள்",
+            "level": 2,
+            "name_audio": "data/B_diffSounds/Level2/d_name.wav",
+            "audio1": "data/B_diffSounds/Level2/d_1.wav",
+            "audio2": "data/B_diffSounds/Level2/d_2.wav",
+            "id": "II.B.1.d"
+        },
+        {
+            "name": "ஆண் மற்றும் பெண் குரல்",
+            "level": 2,
+            "name_audio": "data/B_diffSounds/Level2/e_name.wav",
+            "audio1": "data/B_diffSounds/Level2/e_1.wav",
+            "audio2": "data/B_diffSounds/Level2/e_2.wav",
+            "id": "II.B.1.e"
+        },
+        {
+            "name": "சிறுவன் மற்றும் சிறுமி குரல்",
+            "level": 2,
+            "name_audio": "data/B_diffSounds/Level2/f_name.wav",
+            "audio1": "data/B_diffSounds/Level2/f_1.wav",
+            "audio2": "data/B_diffSounds/Level2/f_2.wav",
+            "id": "II.B.1.f"
+        }
+    ],
+    [
+        {
+            "level": 3,
+            "instructions": "data/B_diffSounds/Level3/ins.wav",
+            "name": "data/B_diffSounds/Level3/name.wav"
+        },
+        {
+            "name": "உரத்த மற்றும் மென்மையான ஒலி",
+            "level": 3,
+            "name_audio": "data/B_diffSounds/Level3/a_name.wav",
+            "audio1": "data/B_diffSounds/Level3/a_1.wav",
+            "audio2": "data/B_diffSounds/Level3/a_2.wav",
+            "id": "III.B.1.a"
+        },
+        {
+            "name": "தொடர்ச்சியான மற்றும் திடீர் ஒலி",
+            "level": 3,
+            "name_audio": "data/B_diffSounds/Level3/b_name.wav",
+            "audio1": "data/B_diffSounds/Level3/b_1.wav",
+            "audio2": "data/B_diffSounds/Level3/b_2.wav",
+            "id": "III.B.1.b"
+        },
+        {
+            "name": "உயர் மற்றும் குறைந்த சுருதி ஒலி",
+            "level": 4,
+            "name_audio": "data/B_diffSounds/Level3/c_name.wav",
+            "audio1": "data/B_diffSounds/Level3/c_1.wav",
+            "audio2": "data/B_diffSounds/Level3/c_2.wav",
+            "id": "III.B.1.c"
+        },
+        {
+            "name": "அர்த்தமுள்ள சுற்றுச்சூழல் ஒலிகள்",
+            "level": 3,
+            "name_audio": "data/B_diffSounds/Level3/d_name.wav",
+            "audio1": "data/B_diffSounds/Level3/d_1.wav",
+            "audio2": "data/B_diffSounds/Level3/d_2.wav",
+            "id": "III.B.1.d"
+        },
+        {
+            "name": "ஆண் மற்றும் பெண் குரல்",
+            "level": 3,
+            "name_audio": "data/B_diffSounds/Level3/e_name.wav",
+            "audio1": "data/B_diffSounds/Level3/e_1.wav",
+            "audio2": "data/B_diffSounds/Level3/e_2.wav",
+            "id": "III.B.1.e"
+        },
+        {
+            "name": "சிறுவன் மற்றும் சிறுமி குரல்",
+            "level": 3,
+            "name_audio": "data/B_diffSounds/Level3/f_name.wav",
+            "audio1": "data/B_diffSounds/Level3/f_1.wav",
+            "audio2": "data/B_diffSounds/Level3/f_2.wav",
+            "id": "III.B.1.f"
+        }
+    ]
+]

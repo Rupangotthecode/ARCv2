@@ -5,6 +5,7 @@ import userRoutes from "./routes/users.js";
 import audioRoutes from "./routes/audioSys.js";
 import imgRoutes from "./routes/imgSys.js";
 import resultRoutes from "./routes/results.js";
+import dbJsonRoutes from "./routes/jsonRet.js";
 
 import dotenv from "dotenv";
 
@@ -22,6 +23,7 @@ app.use("/user", userRoutes);
 app.use("/audio", audioRoutes);
 app.use("/image", imgRoutes);
 app.use("/results", resultRoutes);
+app.use("/dbJson", dbJsonRoutes);
 
 mongoose.set("strictQuery", true);
 
