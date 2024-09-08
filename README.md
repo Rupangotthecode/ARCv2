@@ -69,3 +69,6 @@ The app is built using the **MERN Stack**:
 - **Express.js**: Handles the backend server and API requests.
 - **React**: Provides a dynamic and interactive user interface for the kiosk module.
 - **Node.js**: Manages server-side logic and processes.
+
+_Project Video_
+https://www.youtube.com/watch?v=08Iw2y3Dr2k&t=181s
