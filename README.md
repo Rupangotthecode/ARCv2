@@ -1,6 +1,6 @@
 # Aural Rehabilitation for Children in Tamil
 
-**Funded by EPICS in IEEE**
+_Funded by EPICS in IEEE_
 
 ## Overview
 
